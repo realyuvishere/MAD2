@@ -1,21 +1,21 @@
-# TicketShow
+# Grocery Store
 
-A ticket booking platform built using Flask and it's extensions for SQLite and REST APIs.
+A modern grocery store platform built using Flask and it's extensions for SQLite and REST APIs, along with Vue.js for the frontend. It is built with user experience in mind, with flexibility to visualise and manage finances to the granular level.
 
 ## How to run the application
 1. Open the terminal at the root folder
 2. If there is no folder in the root directory by the name `.env`, create a virtual environment for the project to run in and install the dependencies from `requirements.txt`. The following methods can be used to execute this step:
     - **For *nix system users**, to do it **manually**, execute the following commands in the given order:
     ```bash
-    python3 -m venv .env
-    source .env/bin/activate
+    python3 -m venv .venv
+    source .venv/bin/activate
     pip install --upgrade pip
     pip install -r requirements.txt
     ```
     - **For Windows users**, the setup can be done manually by using the following commands in the given order:
     ```powershell
-    python3 -m venv .env
-    .\env\Scripts\activate
+    python3 -m venv .venv
+    .\.venv\Scripts\activate
     pip install --upgrade pip
     pip install -r requirements.txt
     ```
@@ -30,7 +30,7 @@ A ticket booking platform built using Flask and it's extensions for SQLite and R
 ## Technologies used
 - Python v3.7.3
     - External dependencies are listed out in `requirements.txt`.
-- HTML5, CSS3, JavaScript
+- HTML5, CSS3, JavaScript (Vue.js)
 - Bootstrap v5.0.2
 
 ## Folder structure and important files
