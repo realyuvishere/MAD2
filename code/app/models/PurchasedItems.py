@@ -1,7 +1,7 @@
 from ..utils import db
 
-class Purchases(db.Model):
-    __tablename__='Purchases'
+class PurchasedItems(db.Model):
+    __tablename__='PurchasedItems'
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)
     invoice = db.Column(db.Integer, nullable=True, unique=True)
     item = db.Column(db.Integer, nullable=True, unique=False)
