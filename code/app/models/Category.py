@@ -1,4 +1,4 @@
-
+from ..utils import db
 
 class Category(db.Model):
     __tablename__='Category'
