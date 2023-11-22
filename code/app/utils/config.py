@@ -3,7 +3,7 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 
 class FlaskConfig:
-    DEBUG = True
+    DEBUG = False
     API_PREFIX='/api/v1'
     SQLITE_DB_DIR = os.path.join(basedir, "../../db")
     SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(SQLITE_DB_DIR, "db.db")

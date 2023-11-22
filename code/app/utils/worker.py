@@ -1,5 +1,5 @@
 from celery import Celery, Task
-from ..utils.config import CeleryConfig
+from .config import CeleryConfig
 
 def celery_init_app(app):
     class FlaskTask(Task):
