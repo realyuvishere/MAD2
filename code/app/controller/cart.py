@@ -3,7 +3,7 @@ from ..models import Cart
 def createCart(data={}):
     try:
         new_cart = Cart(
-            name=data['name'], 
+            uid=data['uid']
         )
         db.session.add(new_cart)
     except:
@@ -33,3 +33,7 @@ def editCart(data={}):
 
 def getAllCarts():
     return db.session.query(Cart).all()
+
+def getCart(uid='', id=''):
+    cart = db.session.query(Cart).filter((Cart.id == id) | (Cart.uid == uid)).first()
+    return cart

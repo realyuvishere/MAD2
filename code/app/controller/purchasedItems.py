@@ -3,7 +3,10 @@ from ..models import PurchasedItems
 def createPurchasedItems(data={}):
     try:
         new_purchasedItems = PurchasedItems(
-            name=data['name'], 
+            invoice=data['invoice'], 
+            item=data['item'], 
+            purchased_price=data['purchased_price'], 
+            purchased_quantity=data['purchased_quantity']
         )
         db.session.add(new_purchasedItems)
     except:

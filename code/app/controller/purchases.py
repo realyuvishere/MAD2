@@ -1,9 +1,10 @@
-from ..models import Purchases as Purchase
+from ..models import Purchases as Purchase, PurchasedItems
 
 def createPurchase(data={}):
     try:
         new_purchase = Purchase(
-            name=data['name'], 
+            uid=data['uid'], 
+            purchase_date=data['purchase_date']
         )
         db.session.add(new_purchase)
     except:
@@ -33,3 +34,12 @@ def editPurchase(data={}):
 
 def getAllPurchases():
     return db.session.query(Purchase).all()
+
+def getPurchase(id=''):
+    return db.session.query(Purchase).filter((Purchase.id == id)).first()
+
+def getPurchaseDetails(id=''):
+    return db.session.query(Purchase, PurchasedItems).select_from(Purchase).join(PurchasedItems).filter((Purchase.id == id)).first()
+
+def getUserPurchases(uid=''):
+    return db.session.query(Purchase).filter((Purchase.uid == uid)).first()

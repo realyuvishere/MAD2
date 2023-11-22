@@ -6,3 +6,4 @@ class Category(db.Model):
     name = db.Column(db.String, nullable=False, unique=True)
     description = db.Column(db.String, nullable=False)
     active = db.Column(db.Integer, nullable=False) 
+    isRequest = db.Column(db.Integer, nullable=False) 

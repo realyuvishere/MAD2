@@ -4,6 +4,16 @@ def createProduct(data={}):
     try:
         new_product = Product(
             name=data['name'], 
+            description=data['description'], 
+            category=data['category'], 
+            store_manager=data['store_manager'], 
+            price=data['price'], 
+            unit_of_measurement=data['unit_of_measurement'], 
+            quantity_available=data['quantity_available'], 
+            manufactured_on=data['manufactured_on'], 
+            expiry_date=data['expiry_date'],
+            added_on=data['added_on'],
+            active=data['active']
         )
         db.session.add(new_product)
     except:
@@ -33,3 +43,8 @@ def editProduct(data={}):
 
 def getAllProducts():
     return db.session.query(Product).all()
+
+def getProduct(id=''):
+    product = db.session.query(Product).filter((Product.id == id)).first()
+
+    return product

@@ -4,6 +4,9 @@ def createCategory(data={}):
     try:
         new_category = Category(
             name=data['name'], 
+            description=data['description'], 
+            active=data['active'], 
+            isRequest=data['isRequest']
         )
         db.session.add(new_category)
     except:
@@ -33,3 +36,7 @@ def editCategory(data={}):
 
 def getAllCategorys():
     return db.session.query(Category).all()
+
+def getCategory( id=''):
+    category = db.session.query(Category).filter((Category.id == id)).first()
+    return category

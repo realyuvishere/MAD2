@@ -4,6 +4,10 @@ def createUser(data={}):
     try:
         new_user = User(
             name=data['name'], 
+            email=data['email'], 
+            password=data['password'], 
+            restricted=data['restricted'],
+            role=data['role']
         )
         db.session.add(new_user)
     except:
@@ -33,3 +37,7 @@ def editUser(data={}):
 
 def getAllUsers():
     return db.session.query(User).all()
+
+def getUser(uid='', email=''):
+    user = db.session.query(User).filter((User.uid == uid) | (User.email == email)).first()
+    return user

@@ -1,9 +1,11 @@
-from ..models import CartItem
+from ..models import CartItem, Cart
 
 def createCartItem(data={}):
     try:
         new_cartItem = CartItem(
-            name=data['name'], 
+            product=data['product'], 
+            cart=data['cart'], 
+            quantity=data['quantity']
         )
         db.session.add(new_cartItem)
     except:
@@ -33,3 +35,12 @@ def editCartItem(data={}):
 
 def getAllCartItems():
     return db.session.query(CartItem).all()
+
+def getCartItem(id=''):
+    cartItem = db.session.query(CartItem).filter((CartItem.id == id)).first()
+    return cartItem
+
+def getUserCartItems(cart='', uid=''):
+    if (uid):
+        return db.session.query(CartItem, Cart).select_from(CartItem).join(Cart).filter((Cart.uid == uid)).all()
+    return db.session.query(CartItem).filter((CartItem.cart == cart))
