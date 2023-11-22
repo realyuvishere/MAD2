@@ -3,8 +3,8 @@ from datetime import datetime
 
 @app.route('/', methods=['GET'])
 def user_dashboard():
-    return render_template('user_dashboard.html')
+    return render_template('index.html')
 
-@app.route('/search', methods=['GET', 'POST'])
+@app.route('/search', methods=['POST'])
 def user_search():
     return render_template('user_search.html')

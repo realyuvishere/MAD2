@@ -13,18 +13,22 @@ def manager_stats():
 def manager_products():
     return render_template('manager_products.html')
 
-@app.route('/manager/products/create', methods=['GET', 'POST'])
+@app.route('/manager/products/create', methods=['POST'])
 def manager_products_create():
     return render_template('manager_products_create.html')
 
-@app.route('/manager/products/edit/<id>', methods=['GET', 'POST'])
-def manager_products_restrict(id):
-    return render_template('manager_products_restrict.html')
+@app.route('/manager/products/edit/<id>', methods=['POST'])
+def manager_products_edit(id):
+    return render_template('manager_products_edit.html')
 
-@app.route('/manager/products/delete/<id>', methods=['GET', 'POST'])
+@app.route('/manager/products/edit/<id>/restrict', methods=['GET'])
+def manager_products_resrict(id):
+    return render_template('manager_products_edit.html')
+
+@app.route('/manager/products/delete/<id>', methods=['GET'])
 def manager_products_delete(id):
     return render_template('manager_products_delete.html')
 
-@app.route('/manager/category/request', methods=['GET', 'POST'])
+@app.route('/manager/category/request', methods=['POST'])
 def manager_category_request():
     return render_template('manager_category_request.html')
