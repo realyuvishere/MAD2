@@ -1,4 +1,5 @@
 from celery import Celery, Task
+from ..utils.config import CeleryConfig
 
 def celery_init_app(app):
     class FlaskTask(Task):
@@ -7,5 +8,5 @@ def celery_init_app(app):
                 return self.run(*args, **kwargs)
 
     celery_app = Celery(app.name, task_cls=FlaskTask)
-    celery_app.config_from_object("celeryconfig")
+    celery_app.config_from_object(CeleryConfig)
     return celery_app
