@@ -1,29 +1,29 @@
-from ..models import Cart
+from ..models import CartItem
 
-def createCart(data={}):
+def createCartItem(data={}):
     try:
-        new_cart = Cart(
+        new_cartItem = CartItem(
             name=data['name'], 
         )
-        db.session.add(new_cart)
+        db.session.add(new_cartItem)
     except:
         db.session.rollback()
         raise Exception('DB error.')
     else:
         db.session.commit()
-        return new_cart
+        return new_cartItem
 
-def deleteCart(id=''):
-    Cart.query.filter_by(id=id).delete()
+def deleteCartItem(id=''):
+    CartItem.query.filter_by(id=id).delete()
     db.session.commit()
     return True
 
-def editCart(data={}):
+def editCartItem(data={}):
     try:
-        cart = getCart(id=data['id'])
+        cartItem = getCartItem(id=data['id'])
         del data['id']
         for key in data:
-            setattr(cart, key, data[key])
+            setattr(cartItem, key, data[key])
     except:
         db.session.rollback()
         raise Exception('DB error.')
@@ -31,5 +31,5 @@ def editCart(data={}):
         db.session.commit()
         return True
 
-def getAllCarts():
-    return db.session.query(Cart).all()
+def getAllCartItems():
+    return db.session.query(CartItem).all()
