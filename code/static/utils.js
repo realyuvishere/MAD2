@@ -1,8 +1,10 @@
 const make_request_ = (url, params) => {
     const defaultParams = {
-
+        headers: {
+            'Content-Type': 'application/json',
+        },
     }
-    return fetch(url, {...params, ...defaultParams})
+    return fetch(url, {...defaultParams, ...params})
 }
 
 const get = (url, params) => {

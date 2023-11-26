@@ -2,8 +2,20 @@ import router from './router.js'
 import Navbar from './components/Navbar.js'
 
 router.beforeEach((to, from, next) => {
-    if ((to.name !== 'Login') && !localStorage.getItem('auth-token')) {
-        next({ name: 'Login' })
+    if (!localStorage.getItem('auth-token')) {
+
+        switch (to.name) {
+            case 'Login':
+                next()
+                break
+            case 'Sign up':
+                next()
+                break
+            default:
+                next({name: 'Login'})
+                break
+        }
+
     } else {
         next()
     }
