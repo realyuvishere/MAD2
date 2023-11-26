@@ -1,4 +1,5 @@
 from ..models import PurchasedItems
+from ..utils import db
 
 def createPurchasedItems(data={}):
     try:
@@ -23,7 +24,7 @@ def deletePurchasedItems(id=''):
 
 def editPurchasedItems(data={}):
     try:
-        purchasedItems = getPurchasedItems(id=data['id'])
+        purchasedItems = getPurchasedItem(id=data['id'])
         del data['id']
         for key in data:
             setattr(purchasedItems, key, data[key])
@@ -36,3 +37,6 @@ def editPurchasedItems(data={}):
 
 def getAllPurchasedItems():
     return db.session.query(PurchasedItems).all()
+
+def getPurchasedItem(id=''):
+    return db.session.query(PurchasedItems).filter((PurchasedItems.id == id)).first()

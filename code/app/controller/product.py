@@ -1,4 +1,5 @@
 from ..models import Product
+from ..utils import db
 
 def createProduct(data={}):
     try:

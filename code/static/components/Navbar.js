@@ -7,14 +7,42 @@ export default {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav" v-if="role=='user'">
                     <li class="nav-item">
-                        <router-link class="nav-link active" aria-current="page" to="/">Home</router-link>
+                        <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
-                    <li class="nav-item" v-if="role=='admin'">
+                    <li class="nav-item">
                         <router-link class="nav-link" to="/users">Users</router-link>
                     </li>
-                    <li class="nav-item" v-if="role=='stud'">
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
+                    </li>
+                    <li class="nav-item" v-if="is_login">
+                        <button class="nav-link" @click='logout'>logout</button>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" v-if="role=='admin'">
+                    <li class="nav-item">
+                        <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/users">Users</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
+                    </li>
+                    <li class="nav-item" v-if="is_login">
+                        <button class="nav-link" @click='logout'>logout</button>
+                    </li>
+                </ul>
+                <ul class="navbar-nav" v-if="role=='manager'">
+                    <li class="nav-item">
+                        <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/users">Users</router-link>
+                    </li>
+                    <li class="nav-item">
                         <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">

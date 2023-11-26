@@ -1,4 +1,5 @@
 from ..models import Category
+from ..utils import db
 
 def createCategory(data={}):
     try:

@@ -1,4 +1,5 @@
 from ..models import Purchases as Purchase, PurchasedItems
+from ..utils import db
 
 def createPurchase(data={}):
     try:
