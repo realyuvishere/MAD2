@@ -8,6 +8,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String, nullable=False, unique=True)
     password = db.Column(db.String, nullable=False)
     restricted = db.Column(db.Integer, nullable=False)
+    fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
     role = db.Column(db.Integer, nullable=False)
 
 class Role(db.Model, RoleMixin):
