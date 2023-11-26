@@ -1,3 +1,5 @@
+import {post} from '../utils.js'
+
 export default {
     template: `
     <div class='d-flex justify-content-center' style="margin-top: 25vh">
@@ -22,24 +24,21 @@ export default {
     },
     methods: {
         login() {
-            fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.cred),
-            })
-            .then((res) => res.json())
-            .then((data) => {
+            post('/auth/login', this.cred)
+            .then(async (res) => {
+                const data = await res.json()
                 console.log(data)
-                // localStorage.setItem('auth-token', data.token)
-                // localStorage.setItem('role', data.role)
-                // this.$router.push({ path: '/' })
-                
+                console.log(res)
             })
+            // .then((data) => {
+            //     console.log(data)
+            //     // localStorage.setItem('auth-token', data.token)
+            //     // localStorage.setItem('role', data.role)
+            //     // this.$router.push({ path: '/' })
+                
+            // })
             .catch((err) => {
-                const data = err.response.data
-                this.error = data.message
+                this.error = err
             })
         },
     },
