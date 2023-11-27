@@ -3,7 +3,7 @@ from datetime import datetime
 
 @app.route('/auth/login', methods=['POST'])
 def login():
-    return jsonify({'message': 'okay'}), 200
+    return jsonify({'message': 'okay'}), 400
 
 @app.route('/auth/signup', methods=['POST'])
 def signup():
