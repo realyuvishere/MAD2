@@ -2,10 +2,10 @@ const make_request_ = (url, params) => {
     const defaultParams = {
         headers: {
             'Content-Type': 'application/json',
-            'Authentication-Token': localStorage.getItem('t')
+            'Authentication-Token': localStorage.getItem('t') ?? ''
         },
     }
-    return fetch(url, {...defaultParams, ...params})
+    return fetch(url, {...defaultParams, ...params}).then(async (res) => {const data = await res.json();return data})
 }
 
 const get = (url, params) => {
