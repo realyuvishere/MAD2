@@ -3,15 +3,18 @@ from flask_security import Security
 from app.utils import FlaskConfig as Config, db, celery_init_app, datastore
 from celery.schedules import crontab
 from app.services import daily_reminder
+from app.utils import cache
 
 app = Flask(__name__)
 
 Config.DEBUG = True
 
+
 app.config.from_object(Config)
 app.security = Security(app, datastore)
 db.init_app(app=app)
 celery_app = celery_init_app(app)
+cache.init_app(app)
 app.app_context().push()
 
 from app.views import *
