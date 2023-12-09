@@ -2,6 +2,7 @@ const make_request_ = (url, params) => {
     const defaultParams = {
         headers: {
             'Content-Type': 'application/json',
+            'Authentication-Token': localStorage.getItem('t')
         },
     }
     return fetch(url, {...defaultParams, ...params})
