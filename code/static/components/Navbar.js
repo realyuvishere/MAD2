@@ -1,3 +1,5 @@
+import Cart from './Cart.js'
+
 export default {
     template: `
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -27,6 +29,9 @@ export default {
                     </li>
                     <li class="nav-item" v-if="is_login">
                         <button class="nav-link" @click='logout'>logout</button>
+                    </li>
+                    <li class="nav-item" v-if="is_login">
+                        <Cart />
                     </li>
                 </ul>
                 <ul class="navbar-nav" v-if="role=='admin'">
@@ -73,5 +78,8 @@ export default {
             localStorage.removeItem('role')
             this.$router.push({ path: '/login' })
         },
+    },
+    components: {
+        Cart
     },
 }
