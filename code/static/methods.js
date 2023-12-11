@@ -16,9 +16,19 @@ const getUserTypes = () => {
     return get('/auth/user_types')
 }
 
+const getAllInvoices = () => {
+    return get('/invoice/all')
+}
+
+const getInvoiceById = (id) => {
+    return get(`/invoice/single/${id}`)
+}
+
 export {
     login,
     signup,
     createManagerProduct,
     getUserTypes,
+    getAllInvoices,
+    getInvoiceById,
 }
