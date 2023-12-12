@@ -6,7 +6,7 @@ def createUser(data={}):
             name=data['name'], 
             email=data['email'], 
             password=data['password'], 
-            restricted=data['restricted'],
+            active=data['active'],
             role=data['role']
         )
         db.session.add(new_user)
@@ -39,5 +39,5 @@ def getAllUsers():
     return db.session.query(User).all()
 
 def getUser(uid='', email=''):
-    user = db.session.query(User).filter((User.uid == uid) | (User.email == email)).first()
+    user = db.session.query(User).filter((User.id == uid) | (User.email == email)).first()
     return user

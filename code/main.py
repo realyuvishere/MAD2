@@ -1,6 +1,6 @@
 from flask import Flask, render_template
 from flask_security import Security
-from app.utils import FlaskConfig as Config, db, celery_init_app, datastore
+from app.utils import FlaskConfig as Config, db, celery_init_app, datastore, make_db
 from celery.schedules import crontab
 from app.services import daily_reminder
 from app.utils import cache
@@ -32,4 +32,5 @@ def send_email(sender, **kwargs):
     )
 
 if __name__ == '__main__':
+    make_db(app, datastore)
     app.run()

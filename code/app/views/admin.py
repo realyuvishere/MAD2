@@ -1,4 +1,4 @@
-from flask import render_template, current_app as app, request, redirect, url_for
+from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required
 
 @app.route('/admin', methods=['GET'])

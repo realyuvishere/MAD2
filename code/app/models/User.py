@@ -4,14 +4,18 @@ from flask_security import UserMixin, RoleMixin
 class User(db.Model, UserMixin):
     __tablename__='Users'
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)
-    name = db.Column(db.String, nullable=False)
-    email = db.Column(db.String, nullable=False, unique=True)
-    password = db.Column(db.String, nullable=False)
-    restricted = db.Column(db.Integer, nullable=False)
+    email = db.Column(db.String(255), nullable=False, unique=True)
+    password = db.Column(db.String(255), nullable=False)
+    active = db.Column(db.Boolean(), nullable=False)
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
-    role = db.Column(db.Integer, db.ForeignKey('Roles.id'), nullable=False)
+    roles = db.relationship('Role', secondary='UserRoles', backref=db.backref('Users', lazy='dynamic'))
 
 class Role(db.Model, RoleMixin):
-    __tablename__='Roles'
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)
-    name = db.Column(db.String, nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+
+class UserRoles(db.Model):
+    __tablename__ = 'UserRoles'
+    id = db.Column(db.Integer(), primary_key=True)
+    user_id = db.Column('user_id', db.Integer(), db.ForeignKey('Users.id'))
+    role_id = db.Column('role_id', db.Integer(), db.ForeignKey('role.id'))
