@@ -30,6 +30,7 @@ def login():
 
 @app.route('/auth/signup', methods=['POST'])
 def signup():
+    
     return request_ok(message="User signed up.")
 
 @app.route('/auth/user_types', methods=['GET'])

@@ -9,7 +9,7 @@ class User(db.Model, UserMixin):
     password = db.Column(db.String, nullable=False)
     restricted = db.Column(db.Integer, nullable=False)
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
-    role = db.Column(db.Integer, nullable=False)
+    role = db.Column(db.Integer, db.ForeignKey('Roles.id'), nullable=False)
 
 class Role(db.Model, RoleMixin):
     __tablename__='Roles'
