@@ -4,6 +4,7 @@ from flask_security import UserMixin, RoleMixin
 class User(db.Model, UserMixin):
     __tablename__='Users'
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)
+    name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean(), nullable=False)

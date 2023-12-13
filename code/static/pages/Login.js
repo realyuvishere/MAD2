@@ -35,9 +35,12 @@ export default {
             this.error = ''
         },
         loginMethod() {
-            login(this.cred)
+            login(this.payload)
             .then((res) => {
-                console.log(res)
+                localStorage.setItem('t', res.data.token)
+                localStorage.setItem('role', res.data.role)
+
+                this.$router.push({ path: '/' })
             })
         },
     },

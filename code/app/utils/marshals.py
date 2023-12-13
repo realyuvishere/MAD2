@@ -1,9 +1,8 @@
 from flask_restful import fields, marshal
-from datetime import datetime
 
 UserMarshalFields = {
     "id": fields.Integer,
-    # "name": fields.String,
+    "name": fields.String,
     "email": fields.String,
     "role": fields.String(attribute=lambda x: x.roles[0].name),
 }

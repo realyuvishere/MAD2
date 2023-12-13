@@ -2,7 +2,7 @@ import router from './router.js'
 import Navbar from './components/Navbar.js'
 
 router.beforeEach((to, from, next) => {
-    if (!localStorage.getItem('auth-token')) {
+    if (!localStorage.getItem('t')) {
 
         switch (to.name) {
             case 'Login':
@@ -17,7 +17,17 @@ router.beforeEach((to, from, next) => {
         }
 
     } else {
-        next()
+        switch (to.name) {
+            case 'Login':
+                next({name: 'Home'})
+                break
+            case 'Sign up':
+                next({name: 'Home'})
+                break
+            default:
+                next()
+                break
+        }
     }
 })
 

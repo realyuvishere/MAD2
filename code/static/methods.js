@@ -4,6 +4,10 @@ const login = (data={email: String(), password: String()}) => {
     return post('/auth/login', {...data})
 }
 
+const logout = () => {
+    return get('/auth/logout')
+}
+
 const signup = (data={email: String(), password: String(), name: String(),}) => {
     return post('/auth/signup', {...data})
 }
@@ -26,6 +30,7 @@ const getInvoiceById = (id) => {
 
 export {
     login,
+    logout,
     signup,
     createManagerProduct,
     getUserTypes,

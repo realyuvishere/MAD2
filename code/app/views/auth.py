@@ -1,8 +1,7 @@
 from flask import current_app as app, request
-from werkzeug.security import check_password_hash
+from flask_security.utils import hash_password, verify_password
 from ..utils import request_error, request_ok, datastore, request_not_found, user_marshal, roles_marshal, db
 from ..models import Role
-from ..controller import createUser
 
 @app.route('/auth/login', methods=['POST'])
 def login():
@@ -21,7 +20,7 @@ def login():
     if not user:
         return request_not_found("No user with these credentials.")
     
-    if check_password_hash(user.password, password):
+    if verify_password(password, user.password):
         
         payload = user_marshal(user)
         payload['token'] = user.get_auth_token()
@@ -34,20 +33,13 @@ def login():
 def signup():
     data = request.get_json()
 
+    name = data.get('name')
     email = data.get('email')
-    password = data.get('password')
+    password = hash_password(data.get('password'))
     role = data.get('role')
 
-    # userData = {
-    #     'name': name,
-    #     'email': email,
-    #     'password': password,
-    #     'active': True,
-    #     'role': role
-    # }
-
-    # user = createUser(userData)
     user = datastore.create_user(email=email, password=password)
+    user.name = name
     added_role = datastore.add_role_to_user(user=user, role=Role.query.get(role))
     db.session.commit()
     
@@ -68,3 +60,6 @@ def get_user_types():
 
     return request_ok(message="Fetched user types.", payload=payload)
 
+@app.route('/auth/logout', methods=['GET'])
+def logout():
+    return 

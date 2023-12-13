@@ -54,7 +54,24 @@ export default {
         signupMethod() {
             signup(this.payload)
             .then((res) => {
-                console.log(res)
+                localStorage.setItem('t', res.data.token)
+                localStorage.setItem('role', res.data.role)
+
+                this.$router.push({ path: '/' })
+                
+                // switch (res.data.role) {
+                //     case 'user':
+                //         this.$router.push({ path: '/' })
+                //         break
+                //     case 'admin':
+                //         this.$router.push({ path: '/' })
+                //         break
+                //     case 'manager':
+                //         this.$router.push({ path: '/' })
+                //         break
+                //     default:
+                //         break
+                // }
             })
         },
     },

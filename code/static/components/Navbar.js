@@ -1,3 +1,4 @@
+import { logout } from '../methods.js'
 import Cart from './Cart.js'
 
 export default {
@@ -69,14 +70,14 @@ export default {
     data() {
         return {
             role: localStorage.getItem('role'),
-            is_login: localStorage.getItem('auth-token'),
+            is_login: localStorage.getItem('t'),
         }
     },
     methods: {
         logout() {
-            localStorage.removeItem('auth-token')
+            localStorage.removeItem('t')
             localStorage.removeItem('role')
-            this.$router.push({ path: '/login' })
+            logout().then((res) => this.$router.push({ path: '/login' }))
         },
     },
     components: {
