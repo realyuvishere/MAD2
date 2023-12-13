@@ -36,7 +36,9 @@ new Vue({
     template: `
     <div>
         <Navbar :key='has_changed' />
-        <router-view class="m-3" />
+        <div class='d-flex justify-content-center' style="margin-top: 56px">
+            <router-view />
+        </div>
     </div>
     `,
     router,

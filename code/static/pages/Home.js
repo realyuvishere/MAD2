@@ -1,12 +1,16 @@
 export default {
     template: `
-    <div class='d-flex justify-content-center' style="margin-top: 56px">
-        <
+    <div>
+        <div v-if="role=='manager'">
+            <div>
+                
+            </div>
+        </div>
     </div>
     `,
     data() {
         return {
-            
+            role: localStorage.getItem('role')
         }
     },
     methods: {

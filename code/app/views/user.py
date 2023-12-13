@@ -1,11 +1,14 @@
-from flask import current_app as app, request, jsonify, render_template
-from flask_security import auth_required
+from flask import current_app as app, request, render_template
+from flask_security import auth_required, current_user
+from ..utils import request_error, request_ok, request_not_found
 
 @app.route('/', methods=['GET'])
 def homepage():
+    
     return render_template('index.html')
 
-@app.route('/search', methods=['POST'])
+@app.route('/search', methods=['GET', 'POST'])
 @auth_required('token')
 def user_search():
-    return jsonify('user_search.html')
+
+    return request_ok(message="done")

@@ -1,14 +1,7 @@
 export default {
     template: `
-    <div class='d-flex justify-content-center' style="margin-top: 25vh">
-        <div class="mb-3 p-5 bg-light">
-            <div class="alert alert-danger" role="alert" v-if="error">{{error}}</div>
-            <label for="user-email" class="form-label">Email address</label>
-            <input type="email" class="form-control" id="user-email" placeholder="name@example.com" v-model="cred.email">
-            <label for="user-password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="user-password" v-model="cred.password">
-            <button class="btn btn-primary mt-2" @click='login'>Login</button>
-        </div> 
+    <div>
+        
     </div>
     `,
     data() {

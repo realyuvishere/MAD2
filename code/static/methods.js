@@ -28,6 +28,10 @@ const getInvoiceById = (id) => {
     return get(`/invoice/single/${id}`)
 }
 
+const searchProduct = (data={name: String(), filter: String()}) => {
+    return post('/search', {...data})
+}
+
 export {
     login,
     logout,
@@ -36,4 +40,5 @@ export {
     getUserTypes,
     getAllInvoices,
     getInvoiceById,
+    searchProduct,
 }

@@ -2,9 +2,8 @@ import { getUserTypes, signup } from "../methods.js"
 
 export default {
     template: `
-    <div class='d-flex justify-content-center' style="margin-top: 25vh">
+    <div>
         <div class="mb-3 p-5 bg-light">
-            <div class="alert alert-danger" role="alert" v-if="error">{{error}}</div>
             
             <div class="form-floating mb-3">
                 <input type="text" class="form-control" id="name" placeholder="Name" v-model="payload.name">
@@ -30,6 +29,12 @@ export default {
             </div>
 
             <button class="btn btn-primary mt-2" @click='signupMethod'>Sign up</button>
+
+            <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert" v-if="error">
+                <h6>An error occurred</h6>
+                <div>{{error}}</div>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click='clearError'></button>
+            </div>
         </div> 
     </div>
     `,
@@ -51,6 +56,9 @@ export default {
         })
     },
     methods: {
+        clearError() {
+            this.error = ''
+        },
         signupMethod() {
             signup(this.payload)
             .then((res) => {
@@ -59,19 +67,6 @@ export default {
 
                 this.$router.push({ path: '/' })
                 
-                // switch (res.data.role) {
-                //     case 'user':
-                //         this.$router.push({ path: '/' })
-                //         break
-                //     case 'admin':
-                //         this.$router.push({ path: '/' })
-                //         break
-                //     case 'manager':
-                //         this.$router.push({ path: '/' })
-                //         break
-                //     default:
-                //         break
-                // }
             })
         },
     },

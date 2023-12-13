@@ -1,5 +1,5 @@
 from flask import current_app as app, request
-from flask_security.utils import hash_password, verify_password
+from flask_security.utils import hash_password, verify_password, logout_user
 from ..utils import request_error, request_ok, datastore, request_not_found, user_marshal, roles_marshal, db
 from ..models import Role
 
@@ -25,7 +25,7 @@ def login():
         payload = user_marshal(user)
         payload['token'] = user.get_auth_token()
 
-        return request_ok(message="User authorized.")
+        return request_ok(message="User authorized.", payload=payload)
     else:
         return request_error("Wrong password")
 
@@ -62,4 +62,5 @@ def get_user_types():
 
 @app.route('/auth/logout', methods=['GET'])
 def logout():
-    return 
+    logout_user()
+    return request_ok(message='User logged out.')

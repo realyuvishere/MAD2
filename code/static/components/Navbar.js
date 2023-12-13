@@ -10,6 +10,7 @@ export default {
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+
                 <ul class="navbar-nav" v-if="!role">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/login">Login</router-link>
@@ -18,23 +19,25 @@ export default {
                         <router-link class="nav-link" to="/signup">Sign up</router-link>
                     </li>
                 </ul>
+
                 <ul class="navbar-nav" v-if="role=='user'">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/users">Users</router-link>
+                        <router-link class="nav-link" to="/invoices">Invoices</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
+                        <router-link class="nav-link" to="/search">Search</router-link>
                     </li>
-                    <li class="nav-item" v-if="is_login">
-                        <button class="nav-link" @click='logout'>logout</button>
-                    </li>
-                    <li class="nav-item" v-if="is_login">
+                    <li class="nav-item">
                         <Cart />
                     </li>
+                    <li class="nav-item" v-if="is_login">
+                        <button class="btn btn-danger" @click='logoutMethod'>&times;</button>
+                    </li>
                 </ul>
+
                 <ul class="navbar-nav" v-if="role=='admin'">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
@@ -46,9 +49,10 @@ export default {
                         <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
-                        <button class="nav-link" @click='logout'>logout</button>
+                        <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>
                     </li>
                 </ul>
+
                 <ul class="navbar-nav" v-if="role=='manager'">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
@@ -60,9 +64,10 @@ export default {
                         <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
-                        <button class="nav-link" @click='logout'>logout</button>
+                        <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>
                     </li>
                 </ul>
+
             </div>
         </div>
     </nav>
@@ -74,7 +79,7 @@ export default {
         }
     },
     methods: {
-        logout() {
+        logoutMethod() {
             localStorage.removeItem('t')
             localStorage.removeItem('role')
             logout().then((res) => this.$router.push({ path: '/login' }))
