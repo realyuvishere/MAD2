@@ -10,5 +10,10 @@ def homepage():
 @app.route('/search', methods=['GET', 'POST'])
 @auth_required('token')
 def user_search():
+    data = request.get_json()
 
+    name = data.get('name')
+    filter = data.get('filter')
+
+    
     return request_ok(message="done")

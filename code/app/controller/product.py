@@ -1,4 +1,4 @@
-from ..models import Product
+from ..models import Product, User, Category
 from ..utils import db
 
 def createProduct(data={}):
@@ -45,7 +45,16 @@ def editProduct(data={}):
 def getAllProducts():
     return db.session.query(Product).all()
 
+def getProductsByManager(id='', name='', manager=''):
+    return db.session.query(Product, User).select_from(Product).join(User).filter((Product.store_manager == manager) | (Product.store_manager == id) | (User.name.like('%'+name+'%'))).all()
+
 def getProduct(id=''):
     product = db.session.query(Product).filter((Product.id == id)).first()
 
     return product
+
+def getProductsByName(name=''):
+    return db.session.query(Product).filter((Product.name.like('%'+name+'%'))).all()
+
+def getProductsByCategory(name=''):
+    return db.session.query(Product, Category).select_from(Product).join(Category).filter((Category.name.like('%'+name+'%'))).all()
