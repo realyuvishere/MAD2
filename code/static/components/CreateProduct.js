@@ -1,4 +1,4 @@
-import {getCategoriesForManager} from '../methods.js'
+import { createManagerProduct, getCategoriesForManager } from '../methods.js'
 
 export default {
     template: `
@@ -33,18 +33,27 @@ export default {
             <input type="datetime-local" class="form-control" id="expiry" name="expiry" placeholder="Expires on" v-model="payload.expiry_date">
             <label for="expiry">Expires on</label>
         </div>
+
+        <button type="button" class="btn btn-primary" @click="createProductMethod">Primary</button>
     </div>
     `,
     data() {
         return {
             payload: {
-
+                name: String(), 
+                description: String(), 
+                category: Number(), 
+                price: Number(), 
+                unit_of_measurement: Number(), 
+                quantity_available: Number(), 
+                manufactured_on: Date.now(), 
+                expiry_date: Date.now()
             },
             categories: [],
         }
     },
-    created(){
-        
+    created() {
+
         getCategoriesForManager()
         .then((res) => {
             this.categories = [...res.data]
@@ -53,7 +62,10 @@ export default {
     },
     methods: {
         createProductMethod() {
-            
+            createManagerProduct(this.payload)
+            .then((res) => {
+                console.log(res)
+            })
         },
     },
 }
