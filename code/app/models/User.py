@@ -8,6 +8,7 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     password = db.Column(db.String(255), nullable=False)
     active = db.Column(db.Boolean(), nullable=False)
+    restricted = db.Column(db.Boolean(), nullable=False, default=0)
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
     roles = db.relationship('Role', secondary='UserRoles', backref=db.backref('Users', lazy='dynamic'))
 

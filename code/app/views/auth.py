@@ -1,5 +1,5 @@
 from flask import current_app as app, request
-from flask_security.utils import hash_password, verify_password, logout_user
+from flask_security.utils import hash_password, verify_password, logout_user, password_length_validator
 from ..utils import request_error, request_ok, datastore, request_not_found, user_marshal, roles_marshal, db
 from ..models import Role
 
@@ -38,6 +38,21 @@ def signup():
     password = hash_password(data.get('password'))
     role = data.get('role')
 
+    if not name:
+        return request_error("Name is required")
+    
+    if not email:
+        return request_error("Email is required")
+    
+    if not password:
+        return request_error("Password is required")
+    
+    if not role:
+        return request_error("Role is required")
+    
+    if datastore.find_user(email=email):
+        return request_error(f"User with email {email} already exists.")
+    
     user = datastore.create_user(email=email, password=password)
     user.name = name
     added_role = datastore.add_role_to_user(user=user, role=Role.query.get(role))
@@ -48,6 +63,8 @@ def signup():
         payload['token'] = user.get_auth_token()
 
         return request_ok(message="User signed up.", payload=payload)
+    else:
+        return request_error()
 
 @app.route('/auth/user_types', methods=['GET'])
 def get_user_types():

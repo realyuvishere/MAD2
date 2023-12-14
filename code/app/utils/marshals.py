@@ -30,7 +30,9 @@ RoleMarshalFields = {
 CategoryMarshalFields = {
     "id": fields.Integer,
     "name": fields.String,
-    "description": fields.String
+    "description": fields.String,
+    'active': fields.Boolean,
+    'isRequest': fields.Boolean,
 }
 
 def roles_marshal(data):

@@ -1,5 +1,6 @@
 from ..models import User
 from ..utils import db
+
 def createUser(data={}):
     try:
         new_user = User(
