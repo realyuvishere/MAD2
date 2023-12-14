@@ -16,9 +16,9 @@ ProductMarshalFields = {
     'price': fields.Integer,
     'unit_of_measurement': fields.String,
     'quantity_available': fields.Integer,
-    'manufactured_on': fields.String,
-    'expiry_date': fields.String,
-    'added_on': fields.String,
+    'manufactured_on': fields.DateTime,
+    'expiry_date': fields.DateTime,
+    'added_on': fields.DateTime,
     'active': fields.Boolean,
 }
 
@@ -35,6 +35,12 @@ CategoryMarshalFields = {
     'isRequest': fields.Boolean,
 }
 
+InvoiceMarshalFields = {
+    "id": fields.Integer,
+    "uid": fields.Integer,
+    "purchase_date": fields.DateTime
+}
+
 def marshal_roles(data):
     return marshal(data, RoleMarshalFields)
 
@@ -46,3 +52,6 @@ def marshal_product(data):
 
 def marshal_category(data):
     return marshal(data, CategoryMarshalFields)
+
+def marshal_invoice(data):
+    return marshal(data, )

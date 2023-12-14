@@ -1,3 +1,4 @@
+from datetime import datetime
 from ..utils import db
 
 class Product(db.Model):
@@ -10,7 +11,7 @@ class Product(db.Model):
     price = db.Column(db.Integer, nullable=False)
     unit_of_measurement = db.Column(db.String, nullable=False)
     quantity_available = db.Column(db.Integer, nullable=False)
-    manufactured_on = db.Column(db.Integer, nullable=False)
-    expiry_date = db.Column(db.Integer, nullable=False)
-    added_on = db.Column(db.Integer, nullable=False)
+    manufactured_on = db.Column(db.DateTime, nullable=False)
+    expiry_date = db.Column(db.DateTime, nullable=False)
+    added_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
     active = db.Column(db.Integer, nullable=False)

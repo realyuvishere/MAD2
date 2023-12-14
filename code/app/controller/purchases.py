@@ -1,4 +1,4 @@
-from ..models import Purchases as Purchase, PurchasedItems
+from ..models import Purchases as Purchase, PurchasedItems, Product
 from ..utils import db
 
 def createPurchase(data={}):
@@ -36,11 +36,14 @@ def editPurchase(data={}):
 def getAllPurchases():
     return db.session.query(Purchase).all()
 
+def getUserPurchases(uid=''):
+    return db.session.query(Purchase).filter(Purchase.uid == uid).all()
+
 def getPurchase(id=''):
     return db.session.query(Purchase).filter((Purchase.id == id)).first()
 
 def getPurchaseDetails(id=''):
-    return db.session.query(Purchase, PurchasedItems).select_from(Purchase).join(PurchasedItems).filter((Purchase.id == id)).first()
+    return db.session.query(Purchase, PurchasedItems, Product).select_from(Purchase).join(PurchasedItems).join(Product).filter((Purchase.id == id)).first()
 
 def getUserPurchases(uid=''):
     return db.session.query(Purchase).filter((Purchase.uid == uid)).first()
