@@ -75,7 +75,7 @@ def admin_category_create():
     createData = {
         'name': data.get('name'),
         'description': data.get('description'),
-        'active': 1,
+        'active': data.get('active'),
         'isRequest': 0,
     }
 

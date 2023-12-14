@@ -39,7 +39,7 @@ def getAllCategorys():
     return db.session.query(Category).all()
 
 def getActiveCategories():
-    return db.session.query(Category).filter(Category.active == True).all()
+    return db.session.query(Category).filter(Category.active == 1).all()
 
 def getCategory( id=''):
     category = db.session.query(Category).filter((Category.id == id)).first()
