@@ -35,10 +35,10 @@ CategoryMarshalFields = {
     'isRequest': fields.Boolean,
 }
 
-def roles_marshal(data):
+def marshal_roles(data):
     return marshal(data, RoleMarshalFields)
 
-def user_marshal(data):
+def marshal_user(data):
     return marshal(data, UserMarshalFields)
 
 def marshal_product(data):

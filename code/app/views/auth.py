@@ -1,6 +1,6 @@
 from flask import current_app as app, request
 from flask_security.utils import hash_password, verify_password, logout_user, password_length_validator
-from ..utils import request_error, request_ok, datastore, request_not_found, user_marshal, roles_marshal, db
+from ..utils import request_error, request_ok, datastore, request_not_found, marshal_user, marshal_roles, db
 from ..models import Role
 
 @app.route('/auth/login', methods=['POST'])
@@ -22,7 +22,7 @@ def login():
     
     if verify_password(password, user.password):
         
-        payload = user_marshal(user)
+        payload = marshal_user(user)
         payload['token'] = user.get_auth_token()
 
         return request_ok(message="User authorized.", payload=payload)
@@ -59,7 +59,7 @@ def signup():
     db.session.commit()
     
     if added_role:
-        payload = user_marshal(datastore.find_user(id=user.id))
+        payload = marshal_user(datastore.find_user(id=user.id))
         payload['token'] = user.get_auth_token()
 
         return request_ok(message="User signed up.", payload=payload)
@@ -71,7 +71,7 @@ def get_user_types():
 
     roles = Role.query.all()
 
-    payload = roles_marshal(roles)
+    payload = marshal_roles(roles)
     
     payload = [d for d in payload if d.get('name') != 'admin']
 

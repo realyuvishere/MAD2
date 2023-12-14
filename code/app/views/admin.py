@@ -1,7 +1,7 @@
 from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required
 from ..controller import getUser, getAllCategorys, createCategory, editCategory, getCategory, deleteCategory
-from ..utils import datastore, db, request_ok, request_not_found, request_error, marshal_category, user_marshal
+from ..utils import datastore, db, request_ok, request_not_found, request_error, marshal_category, marshal_user
 
 # @app.route('/admin', methods=['GET'])
 # @auth_required('token')
@@ -54,7 +54,7 @@ def admin_managers():
     man_role = datastore.find_role("manager")
     managers = datastore.find_user(roles=[man_role])
 
-    return request_ok(payload=user_marshal(managers))
+    return request_ok(payload=marshal_user(managers))
 
 @app.route('/admin/category', methods=['GET'])
 @auth_required('token')
