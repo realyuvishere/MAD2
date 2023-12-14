@@ -1,6 +1,6 @@
 from ..models import Product, User, Category
 from ..utils import db
-from . import getAllPurchasedItemsByProduct
+from .purchasedItems import getAllPurchasedItemsByProduct
 
 def createProduct(data={}):
     try:
