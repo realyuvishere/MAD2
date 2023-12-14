@@ -36,6 +36,18 @@ const getCategoriesForManager = () => {
     return get('/manager/categories')
 }
 
+const getCategoriesForAdmin = () => {
+    return get('/admin/category')
+}
+
+const createCategoryForAdmin = (data={name: String(), description: String(), active: String()}) => {
+    return post('/admin/category/create', {...data})
+}
+
+const getMarketplace = () => {
+    return get('/marketplace')
+}
+
 export {
     login,
     logout,
@@ -45,5 +57,8 @@ export {
     getAllInvoices,
     getInvoiceById,
     searchProduct,
-    getCategoriesForManager
+    getCategoriesForManager,
+    getCategoriesForAdmin,
+    createCategoryForAdmin,
+    getMarketplace,
 }

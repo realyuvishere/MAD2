@@ -43,10 +43,13 @@ export default {
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/users">Users</router-link>
+                        <router-link class="nav-link" to="/admin/managers">Managers</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
+                        <router-link class="nav-link" to="/admin/users">Users</router-link>
+                    </li>
+                    <li class="nav-item">
+                        <router-link class="nav-link" to="/admin/category">Categories</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
                         <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>
@@ -58,10 +61,10 @@ export default {
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/users">Users</router-link>
+                        <router-link class="nav-link" to="/manager/products">Manage products</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/create-resource">Create Resource</router-link>
+                        <router-link class="nav-link" to="/">Create Resource</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
                         <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>

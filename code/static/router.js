@@ -5,6 +5,7 @@ import Login from './pages/Login.js'
 import Signup from './pages/Signup.js'
 import Marketplace from './pages/Marketplace.js'
 import AdminUsers from './pages/AdminUsers.js'
+import AdminCategories from './pages/AdminCategories.js'
 import ManagerProducts from './pages/ManagerProducts.js'
 import Invoices from './pages/Invoices.js'
 import AdminManagers from './pages/AdminManagers.js'
@@ -20,6 +21,7 @@ const routes = [
     // { path: '/admin', component: Admin, name: 'Admin home' },
     { path: '/admin/users', component: AdminUsers, name: 'Admin user dashboard' },
     { path: '/admin/managers', component: AdminManagers, name: 'Admin manager dashboard' },
+    { path: '/admin/category', component: AdminCategories, name: 'Admin category dashboard' },
     // { path: '/manager', component: ManagerHome, name: 'Manager home' },
     { path: '/manager/products', component: ManagerProducts, name: 'Manager products' },
 ]
