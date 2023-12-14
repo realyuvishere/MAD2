@@ -1,4 +1,5 @@
 import { logout } from '../methods.js'
+import { delete_user, get_token, get_user_role } from '../utils.js'
 import Cart from './Cart.js'
 
 export default {
@@ -77,14 +78,13 @@ export default {
     `,
     data() {
         return {
-            role: localStorage.getItem('role'),
-            is_login: localStorage.getItem('t'),
+            role: get_user_role(),
+            is_login: get_token(),
         }
     },
     methods: {
         logoutMethod() {
-            localStorage.removeItem('t')
-            localStorage.removeItem('role')
+            delete_user()
             logout().then((res) => this.$router.push({ path: '/login' }))
         },
     },

@@ -62,11 +62,14 @@ def admin_managers():
 def admin_category():
     categories = getAllCategorys()
 
-    if categories:
+    if categories is not None:
         payload = marshal_category(categories)
         return request_ok(payload=payload)
+    else:
+        return request_error()
 
-@app.route('/admin/category/create', methods=['GET'])
+
+@app.route('/admin/category/create', methods=['POST'])
 @auth_required('token')
 @roles_required("admin")
 def admin_category_create():
@@ -80,6 +83,7 @@ def admin_category_create():
     }
 
     category = createCategory(createData)
+
 
     payload = marshal_category(category)
 

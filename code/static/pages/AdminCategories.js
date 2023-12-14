@@ -2,7 +2,7 @@ import { createCategoryForAdmin, getCategoriesForAdmin } from "../methods.js"
 
 export default {
     template: `
-    <div>
+    <div class="w-100">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCategory">
             Create category
         </button>
@@ -55,7 +55,9 @@ export default {
                     <td>{{ category.name }}</td>
                     <td>{{ category.description }}</td>
                     <td>
-
+                        <span class="badge text-bg-warning" v-if="category.isRequest">Request</span>
+                        <span class="badge text-bg-success" v-if="category.active">Active</span>
+                        <span class="badge text-bg-danger" v-if="!category.active">Inactive</span>
                     </td>
                 </tr>
             </tbody>
@@ -83,11 +85,10 @@ export default {
             this.payload.active = !this.payload.active
         },
         createCategoryMethod() {
-            console.log(this.payload)
-            // createCategoryForAdmin(this.payload)
-            // .then((res) => {
-
-            // })
+            createCategoryForAdmin({...this.payload})
+            .then((res) => {
+                console.log(res)
+            })
         }
     },
 }

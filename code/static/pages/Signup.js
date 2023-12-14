@@ -1,4 +1,5 @@
 import { getUserTypes, signup } from "../methods.js"
+import { store_user } from "../utils.js"
 
 export default {
     template: `
@@ -62,9 +63,7 @@ export default {
         signupMethod() {
             signup(this.payload)
             .then((res) => {
-                localStorage.setItem('t', res.data.token)
-                localStorage.setItem('role', res.data.role)
-
+                store_user({...res.data})
                 this.$router.push({ path: '/' })
                 
             })

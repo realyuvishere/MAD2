@@ -6,7 +6,7 @@ def send_request(payload=dict(), message="", code=0):
         'message': message
     }
 
-    if (len(payload) > 0) or (len(payload.keys()) > 0):
+    if ((len(payload) >= 0) and (type(payload) is list)) or ((len(payload.keys()) > 0)):
         response_body["data"] = payload
 
     return jsonify(response_body), code

@@ -1,8 +1,9 @@
 import router from './router.js'
 import Navbar from './components/Navbar.js'
+import { get_token } from './utils.js'
 
 router.beforeEach((to, from, next) => {
-    if (!localStorage.getItem('t')) {
+    if (!get_token()) {
 
         switch (to.name) {
             case 'Login':

@@ -18,11 +18,9 @@ const routes = [
     { path: '/market', component: Marketplace, name: 'Marketplace' },
     { path: '/invoices', component: Invoices, name: 'Invoices' },
     { path: '/search', component: Search, name: 'Search' },
-    // { path: '/admin', component: Admin, name: 'Admin home' },
     { path: '/admin/users', component: AdminUsers, name: 'Admin user dashboard' },
     { path: '/admin/managers', component: AdminManagers, name: 'Admin manager dashboard' },
     { path: '/admin/category', component: AdminCategories, name: 'Admin category dashboard' },
-    // { path: '/manager', component: ManagerHome, name: 'Manager home' },
     { path: '/manager/products', component: ManagerProducts, name: 'Manager products' },
 ]
 
