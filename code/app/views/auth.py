@@ -2,6 +2,7 @@ from flask import current_app as app, request
 from flask_security.utils import hash_password, verify_password, logout_user, password_length_validator
 from ..utils import request_error, request_ok, datastore, request_not_found, marshal_user, marshal_roles, db
 from ..models import Role
+from ..controller import createCart
 
 @app.route('/auth/login', methods=['POST'])
 def login():
@@ -55,9 +56,17 @@ def signup():
     
     user = datastore.create_user(email=email, password=password)
     user.name = name
-    added_role = datastore.add_role_to_user(user=user, role=Role.query.get(role))
+    selected_role = Role.query.get(role)
+    added_role = datastore.add_role_to_user(user=user, role=selected_role)
+    
+    if selected_role.name == "manager":
+        user.restricted = 1
+    elif selected_role.name == "user":
+        cart = createCart({'uid': user.id})
+    
     db.session.commit()
     
+
     if added_role:
         payload = marshal_user(datastore.find_user(id=user.id))
         payload['token'] = user.get_auth_token()

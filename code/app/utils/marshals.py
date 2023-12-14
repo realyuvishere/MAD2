@@ -47,6 +47,11 @@ InvoiceDetailsMarshalFields = {
     "purchase_date": fields.DateTime
 }
 
+CartItemDetailsMarshalFields = {
+    "id": fields.Integer,
+    
+}
+
 def marshal_roles(data):
     return marshal(data, RoleMarshalFields)
 
@@ -64,3 +69,6 @@ def marshal_invoice(data):
 
 def marshal_invoice_details(data):
     return marshal(data, InvoiceDetailsMarshalFields)
+
+def marshal_cart_items(data):
+    return marshal(data, CartItemDetailsMarshalFields)

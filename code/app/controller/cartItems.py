@@ -44,4 +44,4 @@ def getCartItem(id=''):
 def getUserCartItems(cart='', uid=''):
     if (uid):
         return db.session.query(CartItem, Cart).select_from(CartItem).join(Cart).filter((Cart.uid == uid)).all()
-    return db.session.query(CartItem).filter((CartItem.cart == cart))
+    return db.session.query(CartItem).filter((CartItem.cart == cart)).all()

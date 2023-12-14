@@ -38,5 +38,8 @@ def editPurchasedItems(data={}):
 def getAllPurchasedItems():
     return db.session.query(PurchasedItems).all()
 
+def getAllPurchasedItemsByProduct(id=''):
+    return db.session.query(PurchasedItems).filter(PurchasedItems.item == id).all()
+
 def getPurchasedItem(id=''):
     return db.session.query(PurchasedItems).filter((PurchasedItems.id == id)).first()

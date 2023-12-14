@@ -1,5 +1,6 @@
 from ..models import Product, User, Category
 from ..utils import db
+from . import getAllPurchasedItemsByProduct
 
 def createProduct(data={}):
     try:
@@ -58,3 +59,18 @@ def getProductsByName(name=''):
 
 def getProductsByCategory(name=''):
     return db.session.query(Product, Category).select_from(Product).join(Category).filter((Category.name.like('%'+name+'%'))).all()
+
+def getProductAvailableQuantity(id=''):
+    q = 0
+    
+    product = getProduct(id)
+
+    q += int(product.quantity_available)
+
+    purchases = getAllPurchasedItemsByProduct(id=id)
+
+    for item in purchases:
+        _q = int(item.purchased_quantity)
+        q -= _q
+
+    return q    
