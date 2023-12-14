@@ -62,7 +62,7 @@ def manager_products_create():
 
     product = createProduct(createData)
 
-    return request_ok(message="Product created")
+    return request_ok(message="Product created", payload=marshal_product(product))
 
 @app.route('/manager/products/edit/<id>', methods=['POST'])
 @auth_required('token')
@@ -85,9 +85,12 @@ def manager_products_edit(id):
         'active': (data.get('active')),
     }
 
-    editProduct(editData)
+    edited = editProduct(editData)
 
-    return render_template('manager_products_edit.html')
+    if edited:
+        return request_ok(message="Product edited")
+    else:
+        return request_error()
 
 @app.route('/manager/products/edit/<id>/restrict', methods=['GET'])
 @auth_required('token')
