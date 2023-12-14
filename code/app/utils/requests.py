@@ -14,7 +14,7 @@ def send_request(payload=dict(), message="", code=0):
 def request_ok(payload=dict(), message=""):
     return send_request(payload=payload, message=message, code=200)
 
-def request_error(message=""):
+def request_error(message="Something went wrong"):
     return send_request(message=message, code=400)
 
 def request_forbidden(message=""):

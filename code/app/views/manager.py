@@ -1,20 +1,28 @@
 from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required, current_user
-from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct
-from ..utils import request_error, request_ok, marshal_product
-from datetime import datetime
+from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories
+from ..utils import request_error, request_ok, marshal_product, marshal_category
+# from datetime import datetime
 
-# @app.route('/manager', methods=['GET'])
-# @auth_required('token')
-# @roles_required("manager")
-# def manager_dashboard():
-#     return render_template('manager_dashboard.html')
 
 # @app.route('/manager/stats', methods=['GET'])
 # @auth_required('token')
 # @roles_required("manager")
 # def manager_stats():
 #     return render_template('manager_stats.html')
+
+@app.route('/manager/categories', methods=['GET'])
+@auth_required('token')
+@roles_required("manager")
+def manager_get_active_categories():
+    categories = getActiveCategories()
+
+    if categories:
+        payload = marshal_category(categories)
+        return request_ok(payload=payload)
+    else:
+        return request_error()
+
 
 @app.route('/manager/products', methods=['GET'])
 @auth_required('token')
@@ -28,6 +36,8 @@ def manager_products():
     if payload:
         payload = marshal_product(payload)
         return request_ok(payload)
+    else:
+        return request_error()
 
 @app.route('/manager/products/create', methods=['POST'])
 @auth_required('token')
@@ -46,19 +56,37 @@ def manager_products_create():
         'quantity_available': data.get('quantity_available'),
         'manufactured_on': data.get('manufactured_on'),
         'expiry_date': data.get('expiry_date'),
-        'added_on': datetime.now(),
         'active': True,
     }
     
 
-    createProduct(createData)
+    product = createProduct(createData)
 
-    return render_template('manager_products_create.html')
+    return request_ok(message="Product created")
 
 @app.route('/manager/products/edit/<id>', methods=['POST'])
 @auth_required('token')
 @roles_required("manager")
 def manager_products_edit(id):
+
+    data = request.get_json()
+
+    editData = {
+        'id': int(id),
+        'name': data.get('name'),
+        'description': data.get('description'),
+        'category': data.get('category'),
+        'store_manager': int(current_user.id),
+        'price': int(data.get('price')),
+        'unit_of_measurement': data.get('unit_of_measurement'),
+        'quantity_available': int(data.get('quantity_available')),
+        'manufactured_on': data.get('manufactured_on'),
+        'expiry_date': data.get('expiry_date'),
+        'active': (data.get('active')),
+    }
+
+    editProduct(editData)
+
     return render_template('manager_products_edit.html')
 
 @app.route('/manager/products/edit/<id>/restrict', methods=['GET'])
@@ -76,7 +104,7 @@ def manager_products_resrict(id):
     if edited:
         return request_ok(message="Product restricted")
     else:
-        return request_error(message="Something went wrong")
+        return request_error()
 
 @app.route('/manager/products/delete/<id>', methods=['GET'])
 @auth_required('token')

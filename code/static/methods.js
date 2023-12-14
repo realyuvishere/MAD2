@@ -32,6 +32,10 @@ const searchProduct = (data={name: String(), filter: String()}) => {
     return post('/search', {...data})
 }
 
+const getCategoriesForManager = () => {
+    return get('/manager/categories')
+}
+
 export {
     login,
     logout,
@@ -41,4 +45,5 @@ export {
     getAllInvoices,
     getInvoiceById,
     searchProduct,
+    getCategoriesForManager
 }

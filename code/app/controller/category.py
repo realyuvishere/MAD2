@@ -38,6 +38,9 @@ def editCategory(data={}):
 def getAllCategorys():
     return db.session.query(Category).all()
 
+def getActiveCategories():
+    return db.session.query(Category).filter(Category.active == True).all()
+
 def getCategory( id=''):
     category = db.session.query(Category).filter((Category.id == id)).first()
     return category
