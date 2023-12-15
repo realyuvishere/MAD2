@@ -28,7 +28,7 @@ const getInvoiceById = (id) => {
     return get(`/invoice/single/${id}`)
 }
 
-const searchProduct = (data={name: String(), filter: String()}) => {
+const searchProduct = (data={search: String(), filter: String()}) => {
     return post('/search', {...data})
 }
 
