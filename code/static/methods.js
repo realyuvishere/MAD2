@@ -48,6 +48,22 @@ const getMarketplace = () => {
     return get('/marketplace')
 }
 
+const getUserCartItems = () => {
+    return get('/cart')
+}
+
+const removeCartItem = (id, data={quantity: Number()}) => {
+    return post(`/cart/item/remove/${id}`)
+}
+
+const addCartItem = (id, data={quantity: Number()}) => {
+    return post(`/cart/item/add/${id}`, {...data})
+}
+
+const addNewCartItem = (data={quantity: Number(), product: Number()}) => {
+    return post('/cart/item/add/new', {...data})
+}
+
 export {
     login,
     logout,
@@ -61,4 +77,8 @@ export {
     getCategoriesForAdmin,
     createCategoryForAdmin,
     getMarketplace,
+    getUserCartItems,
+    removeCartItem,
+    addCartItem,
+    addNewCartItem,
 }

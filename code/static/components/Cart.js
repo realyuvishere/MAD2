@@ -1,39 +1,37 @@
+import { getUserCartItems } from "../methods.js"
+
 export default {
     template: `
     <div>
-        
+        <button type="button" class="btn btn-primary position-relative">
+            Cart
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                {{  }}
+                <span class="visually-hidden">items in cart</span>
+            </span>
+        </button>
     </div>
     `,
     data() {
         return {
-            cred: {
-                email: null,
-                password: null,
-            },
-            error: null,
+            cart_items: []
         }
     },
+    created() {
+        getUserCartItems
+    },
     methods: {
-        login() {
-            fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.cred),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                // localStorage.setItem('auth-token', data.token)
-                // localStorage.setItem('role', data.role)
-                // this.$router.push({ path: '/' })
-                
-            })
-            .catch((err) => {
-                const data = err.response.data
-                this.error = data.message
-            })
+        checkoutMethod() {
+
         },
+        removeItemMethod() {
+
+        },
+        addItemMethod() {
+
+        },
+        deleteItemMethod(q) {
+
+        }
     },
 }

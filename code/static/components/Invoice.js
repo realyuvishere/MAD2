@@ -1,4 +1,4 @@
-import { getInvoiceById } from "../methods"
+import { getInvoiceById } from "../methods.js"
 
 export default {
     template: `
