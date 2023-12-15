@@ -1,7 +1,7 @@
 from flask import current_app as app, request, render_template
-from flask_security import auth_required, current_user
+from flask_security import auth_required
 from ..controller import getAllProducts, getProductsByName, getProductsByCategory
-from ..utils import request_error, request_ok, request_not_found, marshal_product
+from ..utils import request_error, request_ok, request_not_found, marshal_product, cache
 
 @app.route('/', methods=['GET'])
 def homepage():
@@ -29,6 +29,7 @@ def user_search():
 
 @app.route('/marketplace', methods=['GET'])
 @auth_required('token')
+# @cache.cached(timeout=50)
 def user_marketplace():
 
     products = getAllProducts()

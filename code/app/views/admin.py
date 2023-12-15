@@ -3,18 +3,6 @@ from flask_security import auth_required, roles_required
 from ..controller import getUser, getAllCategorys, createCategory, editCategory, getCategory, deleteCategory, getAllUsers
 from ..utils import datastore, db, request_ok, request_not_found, request_error, marshal_category, marshal_user
 
-# @app.route('/admin', methods=['GET'])
-# @auth_required('token')
-# @roles_required("admin")
-# def admin_dashboard():
-#     return render_template('admin_dashboard.html')
-
-# @app.route('/admin/stats', methods=['GET'])
-# @auth_required('token')
-# @roles_required("admin")
-# def admin_stats():
-#     return render_template('admin_stats.html')
-
 @app.route('/admin/users', methods=['GET'])
 @auth_required('token')
 @roles_required("admin")

@@ -1,15 +1,7 @@
-from flask import render_template, current_app as app, request
+from flask import current_app as app, request
 from flask_security import auth_required, roles_required, current_user
 from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories
 from ..utils import request_error, request_ok, marshal_product, marshal_category
-# from datetime import datetime
-
-
-# @app.route('/manager/stats', methods=['GET'])
-# @auth_required('token')
-# @roles_required("manager")
-# def manager_stats():
-#     return render_template('manager_stats.html')
 
 @app.route('/manager/categories', methods=['GET'])
 @auth_required('token')
