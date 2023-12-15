@@ -4,19 +4,21 @@ import Marketplace from "../components/Marketplace.js"
 export default {
     template: `
 
-    <div v-if="role=='user'" class="w-75">
-        <Marketplace />
-    </div>
+    <div class="w-75">
+        
+        <Marketplace v-if="role=='user'" />
 
-    <div v-if="role=='admin'">
-        Welcome admin
-    </div>
-
-    <div v-if="role=='manager'">
-        <div>
-            
+        <div v-if="role=='admin'">
+            Welcome admin
+        </div>
+    
+        <div v-if="role=='manager'">
+            <div>
+                
+            </div>
         </div>
     </div>
+
     `,
     data() {
         return {

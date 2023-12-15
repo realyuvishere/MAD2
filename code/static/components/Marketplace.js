@@ -16,7 +16,7 @@ export default {
             <div class="col-md-8">
                 <div class="form-floating input-group">
                     <input class="form-control" id="search" name="search" type="text" placeholder="Search..." value="" v-model="payload.search" />
-                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                    <button class="btn btn-outline-dark" type="submit" @click="searchMethod">Search</button>
                     <label for="search" class="form-label">Search...</label>
                 </div>
             </div>

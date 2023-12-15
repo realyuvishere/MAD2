@@ -16,12 +16,16 @@ def user_search():
     name = data.get('search')
     filter = data.get('filter')
 
+    products = []
+
     if filter == 'product':
-        getProductsByName(name=name)
+        products = getProductsByName(name=name)
     elif filter == 'category':
-        getProductsByCategory(name=name)
-        
-    return request_ok(message="done")
+        products = getProductsByCategory(name=name)
+    
+    payload = marshal_product(products)
+    
+    return request_ok(payload=payload, message=f"Found {len(products)} results for {filter} named {name}")
 
 @app.route('/marketplace', methods=['GET'])
 @auth_required('token')
