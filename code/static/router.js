@@ -1,5 +1,3 @@
-// import Admin from './pages/Admin.js'
-// import ManagerHome from './pages/ManagerHome.js'
 import Home from './pages/Home.js'
 import Login from './pages/Login.js'
 import Signup from './pages/Signup.js'
