@@ -1,4 +1,6 @@
 import { login } from '../methods.js'
+import { store_user } from '../utils.js'
+import ErrorNotification from '../components/ErrorNotification.js'
 
 export default {
     template: `
@@ -17,13 +19,9 @@ export default {
 
             <button class="btn btn-primary mt-2" @click='loginMethod'>Login</button>
             
-            <div class="alert alert-danger alert-dismissible fade show mt-5" role="alert" v-if="error">
-                <h6>An error occurred</h6>
-                <div>{{error}}</div>
-                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click='clearError'></button>
-            </div>
-            
-        </div> 
+        </div>
+        
+        <ErrorNotification :error="error" /> 
     </div>
     `,
     data() {
@@ -35,17 +33,18 @@ export default {
             error: null,
         }
     },
+    components: {
+        ErrorNotification
+    },
     methods: {
-        clearError() {
-            this.error = ''
-        },
         loginMethod() {
             login(this.payload)
             .then((res) => {
-                localStorage.setItem('t', res.data.token)
-                localStorage.setItem('role', res.data.role)
-
+                store_user({...res.data})
                 this.$router.push({ path: '/' })
+            })
+            .catch((e) => {
+                this.error = e.message
             })
         },
     },

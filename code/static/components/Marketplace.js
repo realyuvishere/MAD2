@@ -3,7 +3,11 @@ import { searchProduct, getMarketplace } from "../methods.js"
 export default {
     template: `
     <div>
-        
+        <div class="form-floating input-group mb-3">
+            <input class="form-control" id="search" name="search" type="text" placeholder="Search..." value="" />
+            <button class="btn btn-outline-dark" type="submit">Search</button>
+            <label for="search" class="form-label">Search...</label>
+        </div>
     </div>
     `,
     data() {

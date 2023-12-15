@@ -3,7 +3,6 @@
 import Home from './pages/Home.js'
 import Login from './pages/Login.js'
 import Signup from './pages/Signup.js'
-import Marketplace from './pages/Marketplace.js'
 import AdminUsers from './pages/AdminUsers.js'
 import AdminCategories from './pages/AdminCategories.js'
 import ManagerProducts from './pages/ManagerProducts.js'
@@ -15,7 +14,6 @@ const routes = [
     { path: '/', component: Home, name: 'Home' },
     { path: '/login', component: Login, name: 'Login' },
     { path: '/signup', component: Signup, name: 'Sign up' },
-    { path: '/market', component: Marketplace, name: 'Marketplace' },
     { path: '/invoices', component: Invoices, name: 'Invoices' },
     { path: '/search', component: Search, name: 'Search' },
     { path: '/admin/users', component: AdminUsers, name: 'Admin user dashboard' },

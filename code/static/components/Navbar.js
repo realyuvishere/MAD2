@@ -29,13 +29,10 @@ export default {
                         <router-link class="nav-link" to="/invoices">Invoices</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/search">Search</router-link>
-                    </li>
-                    <li class="nav-item">
                         <Cart />
                     </li>
                     <li class="nav-item" v-if="is_login">
-                        <button class="btn btn-danger" @click='logoutMethod'>&times;</button>
+                        <button class="btn btn-outline-danger" @click='logoutMethod'><i class="bi bi-power"></i></button>
                     </li>
                 </ul>
 
@@ -53,7 +50,7 @@ export default {
                         <router-link class="nav-link" to="/admin/category">Categories</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
-                        <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>
+                        <button class="btn btn-outline-danger" @click='logoutMethod'><i class="bi bi-power"></i></button>
                     </li>
                 </ul>
 
@@ -68,7 +65,7 @@ export default {
                         <router-link class="nav-link" to="/">Create Resource</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
-                        <button class="btn btn-outline-danger" @click='logoutMethod'>&#9211;</button>
+                        <button class="btn btn-outline-danger" @click='logoutMethod'><i class="bi bi-power"></i></button>
                     </li>
                 </ul>
 
@@ -82,13 +79,13 @@ export default {
             is_login: get_token(),
         }
     },
+    components: {
+        Cart
+    },
     methods: {
         logoutMethod() {
             delete_user()
             logout().then((res) => this.$router.push({ path: '/login' }))
         },
-    },
-    components: {
-        Cart
     },
 }

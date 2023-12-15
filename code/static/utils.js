@@ -34,7 +34,13 @@ const make_request_ = (url, params) => {
             'Authentication-Token': get_token() ?? ''
         },
     }
-    return fetch(url, {...defaultParams, ...params}).then(async (res) => {const data = await res.json();return data})
+    return fetch(url, {...defaultParams, ...params}).then(async (res) => {
+        const data = await res.json();
+        if (res.status !== 200) {
+            throw Error(data.message)
+        }
+        return data
+    })
 }
 
 const get = (url, params) => {
