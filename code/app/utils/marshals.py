@@ -5,6 +5,8 @@ UserMarshalFields = {
     "name": fields.String,
     "email": fields.String,
     "role": fields.String(attribute=lambda x: x.roles[0].name),
+    "active": fields.Boolean,
+    "restricted": fields.Boolean
 }
 
 ProductMarshalFields = {

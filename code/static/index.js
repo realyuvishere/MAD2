@@ -18,7 +18,7 @@ router.beforeEach((to, from, next) => {
         }
 
     } else {
-        user = get_user()
+        const user = get_user()
 
         if (user.active && !user.restricted) {
 
@@ -34,7 +34,14 @@ router.beforeEach((to, from, next) => {
                     break
             }
         } else {
-            next({name: ''})
+            switch (to.name) {
+                case 'Inactive':    
+                    next()
+                    break
+                default:
+                    next({name: 'Inactive'})
+                    break
+            }
         }
     }
 })

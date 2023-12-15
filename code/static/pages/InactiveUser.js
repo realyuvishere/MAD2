@@ -1,6 +1,9 @@
+import { logout } from "../methods.js"
+import { delete_user } from "../utils.js"
+
 export default {
     template: `
-    <div class="w-75 vh-100 d-flex justify-content-center align-items-center">
+    <div class="w-75 d-flex justify-content-center align-items-center" style="height: 75vh">
         <div>
             <h1>You are restricted from accessing the site for now. Admin will activate your account.</h1>
             <div>Get in touch with admin for this</div>

@@ -64,6 +64,18 @@ const addNewCartItem = (data={quantity: Number(), product: Number()}) => {
     return post('/cart/item/add/new', {...data})
 }
 
+const getAllManagers = () => {
+    return get('/admin/managers')
+}
+
+const unrestrictUserById = (id) => {
+    return get(`/admin/users/unrestrict/${id}`)
+}
+
+const restrictUserById = (id) => {
+    return get(`/admin/users/restrict/${id}`)
+}
+
 export {
     login,
     logout,
@@ -81,4 +93,7 @@ export {
     removeCartItem,
     addCartItem,
     addNewCartItem,
+    getAllManagers,
+    restrictUserById,
+    unrestrictUserById,
 }

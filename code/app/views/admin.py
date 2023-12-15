@@ -1,6 +1,6 @@
 from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required
-from ..controller import getUser, getAllCategorys, createCategory, editCategory, getCategory, deleteCategory
+from ..controller import getUser, getAllCategorys, createCategory, editCategory, getCategory, deleteCategory, getAllUsers
 from ..utils import datastore, db, request_ok, request_not_found, request_error, marshal_category, marshal_user
 
 # @app.route('/admin', methods=['GET'])
@@ -52,7 +52,14 @@ def admin_users_unrestrict(id):
 @roles_required("admin")
 def admin_managers():
     man_role = datastore.find_role("manager")
-    managers = datastore.find_user(roles=[man_role])
+    
+    users = getAllUsers()
+
+    managers = []
+
+    for user in users:
+        if user.has_role(man_role):
+            managers.append(user)
 
     return request_ok(payload=marshal_user(managers))
 
