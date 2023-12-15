@@ -1,6 +1,6 @@
 import router from './router.js'
 import Navbar from './components/Navbar.js'
-import { get_token } from './utils.js'
+import { get_token, get_user } from './utils.js'
 
 router.beforeEach((to, from, next) => {
     if (!get_token()) {
@@ -18,16 +18,23 @@ router.beforeEach((to, from, next) => {
         }
 
     } else {
-        switch (to.name) {
-            case 'Login':
-                next({name: 'Home'})
-                break
-            case 'Sign up':
-                next({name: 'Home'})
-                break
-            default:
-                next()
-                break
+        user = get_user()
+
+        if (user.active && !user.restricted) {
+
+            switch (to.name) {
+                case 'Login':
+                    next({name: 'Home'})
+                    break
+                case 'Sign up':
+                    next({name: 'Home'})
+                    break
+                default:
+                    next()
+                    break
+            }
+        } else {
+            next({name: ''})
         }
     }
 })
