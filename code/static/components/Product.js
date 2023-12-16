@@ -12,9 +12,10 @@ export default {
                 <p class="card-text">{{ product.description }}</p>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
+                <li class="list-group-item"><i class="bi bi-currency-rupee"></i>{{ product.price }} / {{ product.unit_of_measurement }}</li>
+                <li class="list-group-item">Available quantity: {{ product.quantity_available }} {{ product.unit_of_measurement }}</li>
+                <li class="list-group-item">Manufacturing date: {{ product.manufactured_on.replace('T', ' ') }}</li>
+                <li class="list-group-item">Best before: {{ product.expiry_date.replace('T', ' ') }}</li>
             </ul>
 
             <div class="card-body" v-if="role=='user'">
@@ -33,8 +34,8 @@ export default {
                 <div class="btn-group w-100" role="group" v-if="role=='manager'">
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductConfirm">Delete</button>
-                    <button type="button" class="btn btn-info" v-if="product.active" @click="deactivateProductMethod">Hide in market</button>
-                    <button type="button" class="btn btn-info" v-if="!product.active" @click="activateProductMethod">Show in market</button>
+                    <button type="button" class="btn btn-info" v-if="product.active" @click="deactivateProductMethod">Make unavailable</button>
+                    <button type="button" class="btn btn-info" v-if="!product.active" @click="activateProductMethod">Make available</button>
                 </div>
             </div>
         </div>

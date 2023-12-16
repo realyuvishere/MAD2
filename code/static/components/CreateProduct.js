@@ -27,6 +27,11 @@ export default {
                             <label for="description">Description</label>
                         </div>
 
+                        <div class="form-floating mb-3">
+                            <input type="number" class="form-control" id="price" placeholder="Price" v-model="payload.price">
+                            <label for="price">Price</label>
+                        </div>
+
                         <div class="form-floating my-3">
                             <select class="form-select" id="category" v-model="payload.category">
                                 <option v-for="category in categories" v-bind:value="category.id">{{ category.name }}</option>
