@@ -4,7 +4,7 @@ import Product from "../components/Product.js"
 
 export default {
     template: `
-    <div>
+    <div class="w-100 p-5 mt-3">
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestCategory">
             Request new category
         </button>
@@ -38,8 +38,8 @@ export default {
             </div>
         </div>
 
-        <div class="my-4">
-            <Product :p="payload" />
+        <div class="my-4 d-flex flex-wrap justify-content-around">
+            <Product v-for="product in products" :p="product" />
         </div>
     </div>
     `,

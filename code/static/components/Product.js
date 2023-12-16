@@ -1,12 +1,14 @@
 import { get_user_role } from "../utils.js"
+import EditProduct from "./EditProduct.js"
+import DeleteProduct from "./DeleteProduct.js"
 
 export default {
     template: `
     <div>
-        <div class="card" style="max-width: 20rem;">
+        <div class="card" style="min-width: 20rem; width: 100%;max-width: 20rem;">
             <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                <h5 class="card-title">{{ product.name }}</h5>
+                <p class="card-text">{{ product.description }}</p>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item">An item</li>
@@ -28,18 +30,20 @@ export default {
             <div class="card-footer">
                 <div class="btn-group w-100" role="group">
                     <button type="button" class="btn btn-primary" @click="addToCartMethod" v-if="role=='user'">Add to cart</button>
-                    <button type="button" class="btn btn-warning">Edit</button>
-                    <button type="button" class="btn btn-danger">Delete</button>
+                    <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductConfirm">Delete</button>
                 </div>
             </div>
         </div>
+        
+        <EditProduct v-if="role=='manager'" :p="product" />
+        <DeleteProduct v-if="role='manager'" :p="product.id" />
     </div>
     `,
     props: ['p'],
     data() {
         return {
             product: {
-                
             },
             payload: {
                 quantity: 0,
@@ -51,6 +55,10 @@ export default {
     created() {
         this.product = {...this.p}
     },
+    components: {
+        EditProduct,
+        DeleteProduct,
+    },
     methods: {
         addProductMethod() {
             this.payload.quantity += 1
@@ -58,7 +66,6 @@ export default {
         subtractProductMethod() {
             if (this.payload.quantity > 0) this.payload.quantity -= 1
         },
-
         addToCartMethod() {
             
         },

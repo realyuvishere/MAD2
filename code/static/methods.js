@@ -104,6 +104,18 @@ const editManagerProduct = (data={id: Number(), name: String(), description: Str
     return post(`/manager/products/edit/${data.id}`, {...data})
 }
 
+const deleteManagerProduct = (id) => {
+    return get(`/manager/products/delete/${id}`)
+}
+
+const unrestrictManagerProduct = (id) => {
+    return get(`/manager/products/edit/${id}/unrestrict`)
+}
+
+const restrictManagerProduct = (id) => {
+    return get(`/manager/products/edit/${id}/restrict`)
+}
+
 export {
     login,
     logout,
@@ -131,4 +143,7 @@ export {
     approveCategoryRequest,
     deleteCategory,
     editManagerProduct,
+    deleteManagerProduct,
+    unrestrictManagerProduct,
+    restrictManagerProduct,
 }

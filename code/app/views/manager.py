@@ -96,7 +96,7 @@ def manager_products_edit(id):
 
     edited = editProduct(editData)
 
-    if edited:
+    if edited is not None:
         return request_ok(message="Product edited")
     else:
         return request_error()
@@ -113,8 +113,25 @@ def manager_products_resrict(id):
 
     edited = editProduct(data)
     
-    if edited:
+    if edited is not None:
         return request_ok(message="Product restricted")
+    else:
+        return request_error()
+
+@app.route('/manager/products/edit/<id>/unrestrict', methods=['GET'])
+@auth_required('token')
+@roles_required("manager")
+def manager_products_unresrict(id):
+
+    data = {
+        'id': id,
+        'active': True
+    }
+
+    edited = editProduct(data)
+    
+    if edited is not None:
+        return request_ok(message="Product activated")
     else:
         return request_error()
 
@@ -125,12 +142,12 @@ def manager_products_delete(id):
 
     product = getProduct(id)
 
-    if product.store_manager.id == current_user.id:
-        deleteProduct(id)
+    if product.store_manager == current_user.id:
+        deleted = deleteProduct(id)
 
-        return request_ok(message="Product deleted.")
-    else:
-        return request_error(message="Problem while deleting.")
+        if deleted:
+            return request_ok(message="Product deleted.")
+    return request_error(message="Problem while deleting.")
 
 @app.route('/manager/category/request', methods=['POST'])
 @auth_required('token')

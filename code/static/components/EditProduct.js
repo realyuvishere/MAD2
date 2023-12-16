@@ -53,7 +53,7 @@ export default {
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" @click="editProductMethod">Edit</button>
+                        <button type="button" class="btn btn-success" @click="editProductMethod" data-bs-dismiss="modal">Edit</button>
                     </div>
                 </div>
             </div>
