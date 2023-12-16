@@ -9,9 +9,12 @@ from ..utils import request_error, request_ok, marshal_cart_items
 def user_cart():
     cart_items = getUserCartItems(uid=current_user.id)
 
-    payload = marshal_cart_items(cart_items)
+    if cart_items is not None:
+        payload = marshal_cart_items(cart_items)
 
-    return request_ok(payload=payload)
+        return request_ok(payload=payload)
+    else: 
+        return request_error()
 
 @app.route('/cart/item/remove/<id>', methods=['POST'])
 @auth_required('token')

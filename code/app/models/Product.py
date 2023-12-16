@@ -15,6 +15,7 @@ class Product(db.Model):
     expiry_date = db.Column(db.String, nullable=False)
     added_on = db.Column(db.String, nullable=False)
     active = db.Column(db.Integer, nullable=False)
+    cart_instances = db.relationship('CartItem', backref="product_details")
     
     # def serialize(self):
     #     return {

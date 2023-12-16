@@ -53,6 +53,10 @@ InvoiceDetailsMarshalFields = {
 
 CartItemDetailsMarshalFields = {
     "id": fields.Integer,
+    "quantity": fields.Integer,
+    "product": fields.Integer,
+    "cart": fields.Integer,
+    "product_details": fields.Nested(ProductMarshalFields)
 }
 
 

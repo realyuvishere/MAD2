@@ -62,7 +62,7 @@ export default {
                         <router-link class="nav-link" to="/manager/products">Manage products</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/">Create Resource</router-link>
+                        <router-link class="nav-link" to="/manager/download">Download CSV</router-link>
                     </li>
                     <li class="nav-item" v-if="is_login">
                         <button class="btn btn-outline-danger" @click='logoutMethod'><i class="bi bi-power"></i></button>

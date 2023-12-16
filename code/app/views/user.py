@@ -1,6 +1,6 @@
 from flask import current_app as app, request, render_template
 from flask_security import auth_required
-from ..controller import getAllProducts, getProductsByName, getProductsByCategory
+from ..controller import getAllProducts, getProductsByName, getProductsByCategory, getProductAvailableQuantity
 from ..utils import request_error, request_ok, request_not_found, marshal_product, cache
 
 @app.route('/', methods=['GET'])
@@ -21,7 +21,9 @@ def user_search():
     if filter == 'product':
         products = getProductsByName(name=name)
     elif filter == 'category':
-        products = getProductsByCategory(name=name)
+        products = [(p for p in c.products) for c in getProductsByCategory(name=name)]
+
+        print(products)
     
     payload = marshal_product(products)
     
@@ -35,5 +37,8 @@ def user_marketplace():
     products = getAllProducts()
 
     payload = marshal_product(products)
+
+    for p in payload:
+        p['units_available'] = getProductAvailableQuantity(p['id'])
 
     return request_ok(payload=payload)

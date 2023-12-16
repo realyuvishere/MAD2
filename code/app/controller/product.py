@@ -61,7 +61,7 @@ def getProductsByName(name=''):
     return db.session.query(Product).filter((Product.name.like('%'+name+'%'))).all()
 
 def getProductsByCategory(name=''):
-    return db.session.query(Product, Category).select_from(Product).join(Category).filter((Category.name.like('%'+name+'%'))).all()
+    return db.session.query(Category).filter((Category.name.like('%'+name+'%'))).all()
 
 def getProductAvailableQuantity(id=''):
     q = 0

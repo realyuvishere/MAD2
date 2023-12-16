@@ -9,13 +9,15 @@ export default {
         <div class="card" style="min-width: 20rem; width: 100%;max-width: 20rem;">
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
-                <p class="card-text">{{ product.description }}</p>
+                <p class="card-text text-muted">{{ product.description }}</p>
+                <div><span class="badge text-bg-primary">{{ product.category_details.name }}</span></div>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><i class="bi bi-currency-rupee"></i>{{ product.price }} / {{ product.unit_of_measurement }}</li>
-                <li class="list-group-item">Available quantity: {{ product.quantity_available }} {{ product.unit_of_measurement }}</li>
-                <li class="list-group-item">Manufacturing date: {{ product.manufactured_on.replace('T', ' ') }}</li>
-                <li class="list-group-item">Best before: {{ product.expiry_date.replace('T', ' ') }}</li>
+                <li class="list-group-item"><b>Supplied quantity</b>: {{ product.quantity_available }} {{ product.unit_of_measurement }}</li>
+                <li class="list-group-item"><b>Available quantity</b>: {{ product.units_available }} {{ product.unit_of_measurement }}(s)</li>
+                <li class="list-group-item"><b>Manufacturing date</b>: {{ product.manufactured_on.replace('T', ' ') }}</li>
+                <li class="list-group-item"><b>Best before</b>: {{ product.expiry_date.replace('T', ' ') }}</li>
             </ul>
 
             <div class="card-body" v-if="role=='user'">
@@ -41,7 +43,7 @@ export default {
         </div>
         
         <EditProduct v-if="role=='manager'" :p="product" />
-        <DeleteProduct v-if="role='manager'" :p="product.id" />
+        <DeleteProduct v-if="role=='manager'" :p="product.id" />
     </div>
     `,
     props: ['p'],

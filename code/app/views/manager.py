@@ -1,6 +1,6 @@
 from flask import current_app as app, request
 from flask_security import auth_required, roles_required, current_user
-from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories
+from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories, getProductAvailableQuantity
 from ..utils import request_error, request_ok, marshal_product, marshal_category
 from datetime import datetime
 
@@ -43,6 +43,10 @@ def manager_products():
 
     if payload is not None:
         payload = marshal_product(payload)
+        
+        for p in payload:
+            p['units_available'] = getProductAvailableQuantity(p['id'])
+        
         return request_ok(payload)
     else:
         return request_error()

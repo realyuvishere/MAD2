@@ -19,9 +19,25 @@ export default {
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        
-                        
+                        <div class="table-responsive">
 
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col">Quantity</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr v-for="item in cart_items">
+                                        <th scope="row">{{ item.id }}</th>
+                                        <td>{{ item.product_details.name }}</td>
+                                        <td>{{ item.quantity }}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-success" @click="checkoutMethod">Checkout</button>
@@ -29,6 +45,7 @@ export default {
                 </div>
             </div>
         </div>
+
     </div>
     `,
     data() {

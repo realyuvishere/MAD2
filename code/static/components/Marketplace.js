@@ -1,4 +1,5 @@
 import { searchProduct, getMarketplace } from "../methods.js"
+import Product from './Product.js'
 
 export default {
     template: `
@@ -22,6 +23,14 @@ export default {
             </div>
         </div>
 
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert" v-if="message">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" @click="clearMessage"></button>
+        </div>
+
+        <div class="my-4 d-flex flex-wrap justify-content-around">
+            <Product v-for="product in products" :p="product" />
+        </div>
     </div>
     `,
     data() {
@@ -32,6 +41,7 @@ export default {
                 filter: 'product',
             },
             error: null,
+            message: '',
         }
     },
     created() {
@@ -39,11 +49,18 @@ export default {
             this.products = [...res.data]
         })
     },
+    components: {
+        Product
+    },
     methods: {
         searchMethod() {
             searchProduct(this.payload).then((res) => {
-                console.log(res)
+                this.products = [...res.data]
+                this.message = res.message
             })
         },
+        clearMessage() {
+            this.message = ''
+        }
     },
 }
