@@ -21,11 +21,16 @@ def user_search():
     if filter == 'product':
         products = getProductsByName(name=name)
     elif filter == 'category':
-        products = [(p for p in c.products) for c in getProductsByCategory(name=name)]
-
-        print(products)
+        p = getProductsByCategory(name=name)
+        products = []
+        for c in p:
+            for _p in c.products:
+                products.append(_p)
     
     payload = marshal_product(products)
+
+    for p in payload:
+        p['units_available'] = getProductAvailableQuantity(p['id'])
     
     return request_ok(payload=payload, message=f"Found {len(products)} results for {filter} named {name}")
 

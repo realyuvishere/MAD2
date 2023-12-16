@@ -1,7 +1,7 @@
 import { get_user_role } from "../utils.js"
 import EditProduct from "./EditProduct.js"
 import DeleteProduct from "./DeleteProduct.js"
-import { restrictManagerProduct, unrestrictManagerProduct } from "../methods.js"
+import { addNewCartItem, restrictManagerProduct, unrestrictManagerProduct } from "../methods.js"
 
 export default {
     template: `
@@ -23,11 +23,11 @@ export default {
             <div class="card-body" v-if="role=='user'">
                 <div class="input-group">
                     <button class="btn btn-link" type="button" @click="subtractProductMethod">
-                        <i class="bi bi-arrow-down-circle"></i>
+                        <i class="bi bi-dash-circle"></i>
                     </button>
                     <input class="form-control" type="number" placeholder="0 units" v-model="payload.quantity">
                     <button class="btn btn-link" type="button" @click="addProductMethod">
-                        <i class="bi bi-arrow-up-circle"></i>
+                        <i class="bi bi-plus-circle"></i>
                     </button>
                 </div>
             </div>
@@ -53,6 +53,7 @@ export default {
             },
             payload: {
                 quantity: 0,
+                product: 0,
             },
             error: null,
             role: get_user_role()
@@ -60,6 +61,7 @@ export default {
     },
     created() {
         this.product = {...this.p}
+        this.payload.product = this.p.id
     },
     components: {
         EditProduct,
@@ -81,7 +83,9 @@ export default {
             .then((res ) => {})
         },
         addToCartMethod() {
-            
+            addNewCartItem({...this.payload})
+            .then((res) => {window.alert(res.data.message)})
+            .finally(() => {this.payload.quantity = 0})
         },
     },
 }

@@ -59,6 +59,11 @@ CartItemDetailsMarshalFields = {
     "product_details": fields.Nested(ProductMarshalFields)
 }
 
+CartDetailsMarshalFields = {
+    "id": fields.Integer,
+    "uid": fields.Integer,
+    "cart_items": fields.Nested(CartItemDetailsMarshalFields)
+}
 
 
 def marshal_roles(data):
@@ -81,3 +86,6 @@ def marshal_invoice_details(data):
 
 def marshal_cart_items(data):
     return marshal(data, CartItemDetailsMarshalFields)
+
+def marshal_cart(data):
+    return marshal(data, CartDetailsMarshalFields)

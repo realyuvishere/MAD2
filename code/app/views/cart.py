@@ -1,16 +1,16 @@
 from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required, current_user
 from ..controller import editCartItem, deleteCartItem, getUserCartItems, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity
-from ..utils import request_error, request_ok, marshal_cart_items
+from ..utils import request_error, request_ok, marshal_cart
 
 @app.route('/cart', methods=['GET'])
 @auth_required('token')
 @roles_required("user")
 def user_cart():
-    cart_items = getUserCartItems(uid=current_user.id)
+    cart = getCart(uid=current_user.id)
 
-    if cart_items is not None:
-        payload = marshal_cart_items(cart_items)
+    if cart is not None:
+        payload = marshal_cart(cart)
 
         return request_ok(payload=payload)
     else: 

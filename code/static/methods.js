@@ -53,7 +53,7 @@ const getUserCartItems = () => {
 }
 
 const removeCartItem = (id, data={quantity: Number()}) => {
-    return post(`/cart/item/remove/${id}`)
+    return post(`/cart/item/remove/${id}`, {...data})
 }
 
 const addCartItem = (id, data={quantity: Number()}) => {
