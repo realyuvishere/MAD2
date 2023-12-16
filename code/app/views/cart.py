@@ -1,6 +1,6 @@
 from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required, current_user
-from ..controller import editCartItem, deleteCartItem, getUserCartItems, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity
+from ..controller import editCartItem, deleteCartItem, getUserCartItem, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity
 from ..utils import request_error, request_ok, marshal_cart
 
 @app.route('/cart', methods=['GET'])
@@ -71,12 +71,13 @@ def user_cart_item_add(id):
             'quantity': quantity,
         }
 
-        cart_item = createCartItem(createData)
+        if (getUserCartItem(cart=cart.id, product=product.id) is None):
+            cart_item = createCartItem(createData)
 
-        if cart_item:
-            return request_ok(message="Added item to cart")
-        else:
-            return request_error()
+            if cart_item:
+                return request_ok(message="Added item to cart")
+
+        return request_error()
         
     elif id.isnumeric():
         cart_item = getCartItem(id)

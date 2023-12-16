@@ -41,7 +41,5 @@ def getCartItem(id=''):
     cartItem = db.session.query(CartItem).filter((CartItem.id == id)).first()
     return cartItem
 
-def getUserCartItems(cart='', uid=''):
-    if (uid):
-        return db.session.query(Cart).filter((Cart.uid == uid)).all()
-    return db.session.query(CartItem).filter((CartItem.cart == cart)).all()
+def getUserCartItem(cart='', product=''):
+    return db.session.query(CartItem).filter((CartItem.cart == cart) & (CartItem.product == product)).first()

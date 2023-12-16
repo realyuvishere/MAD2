@@ -4,7 +4,7 @@ export default {
     template: `
     <div>
 
-        <button type="button" class="btn btn-primary position-relative mx-3" data-bs-toggle="modal" data-bs-target="#userCart" @click="getCartItemsMethod">
+        <button type="button" class="btn btn-primary position-relative me-3 mb-sm-3 mb-lg-0" data-bs-toggle="modal" data-bs-target="#userCart" @click="getCartItemsMethod">
             <i class="bi bi-handbag"></i>
             <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 {{ cart_items.length }}
