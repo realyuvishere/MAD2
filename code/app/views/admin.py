@@ -2,6 +2,7 @@ from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required
 from ..controller import getUser, getAllCategorys, createCategory, editCategory, getCategory, deleteCategory, getAllUsers
 from ..utils import datastore, db, request_ok, request_not_found, request_error, marshal_category, marshal_user
+from ..models import Product
 
 @app.route('/admin/users', methods=['GET'])
 @auth_required('token')

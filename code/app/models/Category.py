@@ -7,7 +7,7 @@ class Category(db.Model):
     description = db.Column(db.String, nullable=False)
     active = db.Column(db.Integer, nullable=False) 
     isRequest = db.Column(db.Boolean(), nullable=False)
-    products = db.relationship('Product', backref="Products")
+    products = db.relationship('Product', backref="category_details")
     # def serialize(self):
     #     return {
     #         'id': self.id,

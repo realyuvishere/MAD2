@@ -9,21 +9,6 @@ UserMarshalFields = {
     "restricted": fields.Boolean
 }
 
-ProductMarshalFields = {
-    'id': fields.Integer,
-    'name': fields.String,
-    'description': fields.String,
-    'category': fields.Integer,
-    'store_manager': fields.Integer,
-    'price': fields.Integer,
-    'unit_of_measurement': fields.String,
-    'quantity_available': fields.Integer,
-    'manufactured_on': fields.String,
-    'expiry_date': fields.String,
-    'added_on': fields.String,
-    'active': fields.Boolean,
-}
-
 RoleMarshalFields = {
     "id": fields.Integer,
     "name": fields.String,
@@ -35,6 +20,23 @@ CategoryMarshalFields = {
     "description": fields.String,
     'active': fields.Boolean,
     'isRequest': fields.Boolean,
+}
+
+ProductMarshalFields = {
+    'id': fields.Integer,
+    'name': fields.String,
+    'description': fields.String,
+    'category': fields.Integer,
+    'category_details': fields.Nested(CategoryMarshalFields),
+    'store_manager': fields.Integer,
+    'store_manager_details': fields.Nested(UserMarshalFields),
+    'price': fields.Integer,
+    'unit_of_measurement': fields.String,
+    'quantity_available': fields.Integer,
+    'manufactured_on': fields.String,
+    'expiry_date': fields.String,
+    'added_on': fields.String,
+    'active': fields.Boolean,
 }
 
 InvoiceMarshalFields = {
@@ -51,8 +53,9 @@ InvoiceDetailsMarshalFields = {
 
 CartItemDetailsMarshalFields = {
     "id": fields.Integer,
-    
 }
+
+
 
 def marshal_roles(data):
     return marshal(data, RoleMarshalFields)
