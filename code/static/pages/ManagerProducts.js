@@ -5,11 +5,13 @@ import Product from "../components/Product.js"
 export default {
     template: `
     <div class="w-100 p-5 mt-3">
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestCategory">
-            Request new category
-        </button>
+        <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestCategory">
+                Request new category
+            </button>
 
-        <CreateProduct />
+            <CreateProduct />
+        </div>
 
         <div class="modal fade" id="requestCategory" tabindex="-1" aria-labelledby="requestCategoryLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -39,7 +41,7 @@ export default {
         </div>
 
         <div class="my-4 d-flex flex-wrap justify-content-around">
-            <Product v-for="product in products" :p="product" />
+        <Product v-for="product in products" :p="product" />
         </div>
     </div>
     `,

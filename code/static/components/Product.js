@@ -1,6 +1,7 @@
 import { get_user_role } from "../utils.js"
 import EditProduct from "./EditProduct.js"
 import DeleteProduct from "./DeleteProduct.js"
+import { restrictManagerProduct, unrestrictManagerProduct } from "../methods.js"
 
 export default {
     template: `
@@ -28,10 +29,12 @@ export default {
                 </div>
             </div>
             <div class="card-footer">
-                <div class="btn-group w-100" role="group">
-                    <button type="button" class="btn btn-primary" @click="addToCartMethod" v-if="role=='user'">Add to cart</button>
+                <button type="button" class="btn btn-primary" @click="addToCartMethod" v-if="role=='user'">Add to cart</button>
+                <div class="btn-group w-100" role="group" v-if="role=='manager'">
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductConfirm">Delete</button>
+                    <button type="button" class="btn btn-info" v-if="product.active" @click="deactivateProductMethod">Hide in market</button>
+                    <button type="button" class="btn btn-info" v-if="!product.active" @click="activateProductMethod">Show in market</button>
                 </div>
             </div>
         </div>
@@ -65,6 +68,14 @@ export default {
         },
         subtractProductMethod() {
             if (this.payload.quantity > 0) this.payload.quantity -= 1
+        },
+        activateProductMethod() {
+            unrestrictManagerProduct(this.product.id)
+            .then((res ) => {})
+        },
+        deactivateProductMethod() {
+            restrictManagerProduct(this.product.id)
+            .then((res ) => {})
         },
         addToCartMethod() {
             
