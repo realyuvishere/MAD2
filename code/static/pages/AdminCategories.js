@@ -140,6 +140,7 @@ export default {
             .then((res) => {
                 console.log(res)
             })
+            .finally(() => this.fetchCategoriesMethod())
         },
         deactivateCategoryMethod(data) {
             makeCategoryInactive({...data})

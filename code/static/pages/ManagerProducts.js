@@ -1,5 +1,6 @@
 import { createManagerCategoryRequest, getManagerProducts } from "../methods.js"
 import CreateProduct from "../components/CreateProduct.js"
+import Product from "../components/Product.js"
 
 export default {
     template: `
@@ -36,6 +37,10 @@ export default {
                 </div>
             </div>
         </div>
+
+        <div class="my-4">
+            <Product :p="payload" />
+        </div>
     </div>
     `,
     data() {
@@ -51,7 +56,8 @@ export default {
         this.getManagerProductsMethod()
     },
     components: {
-        CreateProduct
+        CreateProduct,
+        Product
     },
     methods: {
         getManagerProductsMethod() {

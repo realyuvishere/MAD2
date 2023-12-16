@@ -100,6 +100,10 @@ const deleteCategory = (id) => {
     return get(`/admin/category/delete/${id}`)
 } 
 
+const editManagerProduct = (data={id: Number(), name: String(), description: String(), category: Number(), price: Number(), unit_of_measurement: Number(), quantity_available: Number(), manufactured_on: Date.now(), expiry_date: Date.now()}) => {
+    return post(`/manager/products/edit/${data.id}`, {...data})
+}
+
 export {
     login,
     logout,
@@ -126,4 +130,5 @@ export {
     makeCategoryInactive,
     approveCategoryRequest,
     deleteCategory,
+    editManagerProduct,
 }
