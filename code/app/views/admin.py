@@ -84,7 +84,7 @@ def admin_category_create():
 
     return request_ok(message="Category created", payload=payload)
 
-@app.route('/admin/category/edit/<id>', methods=['GET'])
+@app.route('/admin/category/edit/<id>', methods=['POST'])
 @auth_required('token')
 @roles_required("admin")
 def admin_category_edit(id):
@@ -114,12 +114,13 @@ def admin_category_request_approve(id):
     category = getCategory(id=id)
     
     category.active = 1
+    category.isRequest = 0
 
     db.session.commit()
     
     return request_ok(message="Category approved")
 
-@app.route('/admin/category/delete/<id>', methods=['GET', 'POST'])
+@app.route('/admin/category/delete/<id>', methods=['GET'])
 @auth_required('token')
 @roles_required("admin")
 def admin_category_delete(id):

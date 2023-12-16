@@ -1,4 +1,4 @@
-from flask import render_template, current_app as app, request, redirect, url_for
+from flask import render_template, current_app as app, request
 from flask_security import auth_required, roles_required, current_user
 from ..controller import editCartItem, deleteCartItem, getUserCartItems, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity
 from ..utils import request_error, request_ok, marshal_cart_items

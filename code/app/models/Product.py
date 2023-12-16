@@ -11,7 +11,23 @@ class Product(db.Model):
     price = db.Column(db.Integer, nullable=False)
     unit_of_measurement = db.Column(db.String, nullable=False)
     quantity_available = db.Column(db.Integer, nullable=False)
-    manufactured_on = db.Column(db.DateTime, nullable=False)
-    expiry_date = db.Column(db.DateTime, nullable=False)
-    added_on = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    manufactured_on = db.Column(db.String, nullable=False)
+    expiry_date = db.Column(db.String, nullable=False)
+    added_on = db.Column(db.String, nullable=False)
     active = db.Column(db.Integer, nullable=False)
+    
+    # def serialize(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'description': self.description,
+    #         'category': self.category.serialize(),
+    #         'store_manager': self.store_manager.serialize(),
+    #         'price': self.price,
+    #         'unit_of_measurement': self.unit_of_measurement,
+    #         'quantity_available': self.quantity_available,
+    #         'manufactured_on': self.manufactured_on,
+    #         'expiry_date': self.expiry_date,
+    #         'added_on': self.added_on,
+    #         'active': self.active,
+    #     }

@@ -44,10 +44,13 @@ def editProduct(data={}):
         return True
 
 def getAllProducts():
-    return db.session.query(Product).all()
+    products =  db.session.query(Product).all()
+    # _p = [product.serialize() for product in products]
+    return products
 
 def getProductsByManager(id='', name='', manager=''):
-    return db.session.query(Product, User).select_from(Product).join(User).filter((Product.store_manager == manager) | (Product.store_manager == id) | (User.name.like('%'+name+'%'))).all()
+    products = db.session.query(Product).filter((Product.store_manager == id)).all()
+    return products
 
 def getProduct(id=''):
     product = db.session.query(Product).filter((Product.id == id)).first()

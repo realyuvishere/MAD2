@@ -76,6 +76,30 @@ const restrictUserById = (id) => {
     return get(`/admin/users/restrict/${id}`)
 }
 
+const getManagerProducts = () => {
+    return get('/manager/products')
+}
+
+const createManagerCategoryRequest = (data={name: String(), description: String()}) => {
+    return post('/manager/category/request', {...data})
+}
+
+const makeCategoryActive = (data={id: Number(), name: String(), description: String(), isRequest: Boolean(), active: Boolean()}) => {
+    return post(`/admin/category/edit/${data.id}`, {...data, active: true})
+}
+
+const makeCategoryInactive = (data={id: Number(), name: String(), description: String(), isRequest: Boolean(), active: Boolean()}) => {
+    return post(`/admin/category/edit/${data.id}`, {...data, active: false})
+}
+
+const approveCategoryRequest = (id) => {
+    return get(`/admin/category/approve/${id}`)
+} 
+
+const deleteCategory = (id) => {
+    return get(`/admin/category/delete/${id}`)
+} 
+
 export {
     login,
     logout,
@@ -96,4 +120,10 @@ export {
     getAllManagers,
     restrictUserById,
     unrestrictUserById,
+    getManagerProducts,
+    createManagerCategoryRequest,
+    makeCategoryActive,
+    makeCategoryInactive,
+    approveCategoryRequest,
+    deleteCategory,
 }

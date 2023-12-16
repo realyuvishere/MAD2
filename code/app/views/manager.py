@@ -2,6 +2,20 @@ from flask import current_app as app, request
 from flask_security import auth_required, roles_required, current_user
 from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories
 from ..utils import request_error, request_ok, marshal_product, marshal_category
+from datetime import datetime
+
+@app.route('/manager/download-csv', methods=['GET'])
+@auth_required('token')
+@roles_required("manager")
+def manager_download_csv():
+    categories = getActiveCategories()
+
+    if categories:
+        payload = marshal_category(categories)
+        return request_ok(payload=payload)
+    else:
+        return request_error()
+
 
 @app.route('/manager/categories', methods=['GET'])
 @auth_required('token')
@@ -9,7 +23,7 @@ from ..utils import request_error, request_ok, marshal_product, marshal_category
 def manager_get_active_categories():
     categories = getActiveCategories()
 
-    if categories:
+    if categories is not None:
         payload = marshal_category(categories)
         return request_ok(payload=payload)
     else:
@@ -25,7 +39,9 @@ def manager_products():
 
     payload = getProductsByManager(id=id)
 
-    if payload:
+    # print(payload[0].serialize())
+
+    if payload is not None:
         payload = marshal_product(payload)
         return request_ok(payload)
     else:
@@ -48,6 +64,7 @@ def manager_products_create():
         'quantity_available': data.get('quantity_available'),
         'manufactured_on': data.get('manufactured_on'),
         'expiry_date': data.get('expiry_date'),
+        'added_on': datetime.now().isoformat(),
         'active': True,
     }
     

@@ -11,6 +11,14 @@ class User(db.Model, UserMixin):
     restricted = db.Column(db.Boolean(), nullable=False, default=0)
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
     roles = db.relationship('Role', secondary='UserRoles', backref=db.backref('Users', lazy='dynamic'))
+    # def serialize(self):
+    #     return {
+    #         'id': self.id,
+    #         'name': self.name,
+    #         'email': self.email,
+    #         'active': self.active,
+    #         'restricted': self.restricted,
+    #     }
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)

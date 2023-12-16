@@ -1,39 +1,67 @@
+import { createManagerCategoryRequest, getManagerProducts } from "../methods.js"
+import CreateProduct from "../components/CreateProduct.js"
+
 export default {
     template: `
     <div>
-        
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#requestCategory">
+            Request new category
+        </button>
+
+        <CreateProduct />
+
+        <div class="modal fade" id="requestCategory" tabindex="-1" aria-labelledby="requestCategoryLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="requestCategoryLabel">Create category</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="name" placeholder="Name" v-model="payload.name">
+                            <label for="name">Name</label>
+                        </div>
+                        
+                        <div class="form-floating mb-3">
+                            <input type="text" class="form-control" id="description" placeholder="Description" v-model="payload.description">
+                            <label for="description">Description</label>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" @click="requestCategoryMethod">Create</button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     `,
     data() {
         return {
-            cred: {
-                email: null,
-                password: null,
-            },
-            error: null,
+            products: [],
+            payload: {
+                name: '',
+                description: '',
+            }
         }
     },
+    created() {
+        this.getManagerProductsMethod()
+    },
+    components: {
+        CreateProduct
+    },
     methods: {
-        login() {
-            fetch('/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(this.cred),
-            })
-            .then((res) => res.json())
-            .then((data) => {
-                console.log(data)
-                // localStorage.setItem('auth-token', data.token)
-                // localStorage.setItem('role', data.role)
-                // this.$router.push({ path: '/' })
-                
-            })
-            .catch((err) => {
-                const data = err.response.data
-                this.error = data.message
-            })
+        getManagerProductsMethod() {
+            getManagerProducts().then((res) => {this.products = [...res.data]})
         },
+        requestCategoryMethod() {
+            createManagerCategoryRequest(this.payload)
+            .then((res) => {
+                console.log(res);
+            })
+        }
     },
 }
