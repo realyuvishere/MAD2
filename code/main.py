@@ -13,22 +13,17 @@ Config.DEBUG = True
 app.config.from_object(Config)
 app.security = Security(app, datastore)
 db.init_app(app=app)
-celery_app = celery_init_app(app)
 cache.init_app(app)
 app.app_context().push()
+celery_app = celery_init_app(app)
 
 from app.views import *
 
-
-@app.errorhandler(404)
-def page_not_found(e):
-    return render_template('_404.html'), 404
-
 @celery_app.on_after_configure.connect
-def send_email(sender, **kwargs):
+def send_webhook_message(sender, **kwargs):
     sender.add_periodic_task(
-        crontab(hour=19, minute=55, day_of_month=20),
-        daily_reminder.s('narendra@email.com', 'Daily Test'),
+        crontab(hour=22, minute=10),
+        daily_reminder.s(),
     )
 
 if __name__ == '__main__':

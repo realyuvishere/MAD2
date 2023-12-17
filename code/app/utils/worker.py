@@ -7,6 +7,7 @@ def celery_init_app(app):
             with app.app_context():
                 return self.run(*args, **kwargs)
 
-    celery_app = Celery(app.name, task_cls=FlaskTask)
+    celery_app = Celery(app.name)
     celery_app.config_from_object(CeleryConfig)
+    celery_app.Task = FlaskTask
     return celery_app

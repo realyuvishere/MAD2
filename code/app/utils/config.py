@@ -26,5 +26,5 @@ class CeleryConfig:
 class MailConfig:
     SMTP_HOST = "localhost"
     SMTP_PORT = 1025
-    SENDER_EMAIL = '21f3000180@ds.study.iitm.ac.in'
+    SENDER_EMAIL = 'admin@admin.com'
     SENDER_PASSWORD = ''
