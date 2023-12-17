@@ -12,15 +12,6 @@ class User(db.Model, UserMixin):
     fs_uniquifier = db.Column(db.String(255), unique=True, nullable=False)
     roles = db.relationship('Role', secondary='UserRoles', backref=db.backref('Users', lazy='dynamic'))
     products = db.relationship('Product', backref="store_manager_details")
-    
-    # def serialize(self):
-    #     return {
-    #         'id': self.id,
-    #         'name': self.name,
-    #         'email': self.email,
-    #         'active': self.active,
-    #         'restricted': self.restricted,
-    #     }
 
 class Role(db.Model, RoleMixin):
     id = db.Column(db.Integer, autoincrement=True, unique=True, primary_key=True, nullable=False)

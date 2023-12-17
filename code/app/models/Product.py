@@ -16,19 +16,5 @@ class Product(db.Model):
     added_on = db.Column(db.String, nullable=False)
     active = db.Column(db.Integer, nullable=False)
     cart_instances = db.relationship('CartItem', backref="product_details")
+    purchased_items = db.relationship('PurchasedItems', backref="item_details")
     
-    # def serialize(self):
-    #     return {
-    #         'id': self.id,
-    #         'name': self.name,
-    #         'description': self.description,
-    #         'category': self.category.serialize(),
-    #         'store_manager': self.store_manager.serialize(),
-    #         'price': self.price,
-    #         'unit_of_measurement': self.unit_of_measurement,
-    #         'quantity_available': self.quantity_available,
-    #         'manufactured_on': self.manufactured_on,
-    #         'expiry_date': self.expiry_date,
-    #         'added_on': self.added_on,
-    #         'active': self.active,
-    #     }
