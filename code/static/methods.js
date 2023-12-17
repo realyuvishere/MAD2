@@ -116,6 +116,10 @@ const restrictManagerProduct = (id) => {
     return get(`/manager/products/edit/${id}/restrict`)
 }
 
+const userCartCheckout = () => {
+    return get('/cart/checkout')
+}
+
 export {
     login,
     logout,
@@ -146,4 +150,5 @@ export {
     deleteManagerProduct,
     unrestrictManagerProduct,
     restrictManagerProduct,
+    userCartCheckout,
 }

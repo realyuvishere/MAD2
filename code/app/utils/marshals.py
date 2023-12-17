@@ -39,16 +39,20 @@ ProductMarshalFields = {
     'active': fields.Boolean,
 }
 
+InvoiceDetailsMarshalFields = {
+    "id": fields.Integer,
+    "invoice": fields.Integer,
+    "item": fields.Integer,
+    "purchased_price": fields.Integer,
+    "purchased_quantity": fields.Integer,
+    "item_details": fields.Nested(ProductMarshalFields)
+}
+
 InvoiceMarshalFields = {
     "id": fields.Integer,
     "uid": fields.Integer,
-    "purchase_date": fields.DateTime
-}
-
-InvoiceDetailsMarshalFields = {
-    "id": fields.Integer,
-    "uid": fields.Integer,
-    "purchase_date": fields.DateTime
+    "purchase_date": fields.String,
+    "purchased_items": fields.Nested(InvoiceDetailsMarshalFields)
 }
 
 CartItemDetailsMarshalFields = {

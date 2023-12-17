@@ -1,4 +1,4 @@
-import { getUserCartItems, removeCartItem, addCartItem } from "../methods.js"
+import { getUserCartItems, removeCartItem, addCartItem, userCartCheckout } from "../methods.js"
 
 export default {
     template: `
@@ -90,7 +90,11 @@ export default {
             getUserCartItems().then((res) => {this.cart_items = [...res.data.cart_items]})
         },
         checkoutMethod() {
-
+            userCartCheckout()
+            .then((res) => {
+                alert(res.message)
+            })
+            .finally(() => {this.getCartItemsMethod()})
         },
         removeItemMethod(item) {
             removeCartItem(item.id, {quantity: 1})

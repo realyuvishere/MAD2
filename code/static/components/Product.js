@@ -84,7 +84,7 @@ export default {
         },
         addToCartMethod() {
             addNewCartItem({...this.payload})
-            .then((res) => {window.alert(res.data.message)})
+            .then((res) => {window.alert(res.message)})
             .finally(() => {this.payload.quantity = 0})
         },
     },

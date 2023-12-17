@@ -1,7 +1,8 @@
-from flask import render_template, current_app as app, request
+from flask import current_app as app, request
 from flask_security import auth_required, roles_required, current_user
-from ..controller import editCartItem, deleteCartItem, getUserCartItem, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity
+from ..controller import editCartItem, deleteCartItem, getUserCartItem, createCartItem, getCart, getCartItem, getProduct, getProductAvailableQuantity, createPurchase, createPurchasedItems
 from ..utils import request_error, request_ok, marshal_cart
+from datetime import datetime as dt
 
 @app.route('/cart', methods=['GET'])
 @auth_required('token')
@@ -111,4 +112,16 @@ def user_cart_item_add(id):
 @auth_required('token')
 @roles_required("user")
 def user_cart_checkout():
-    return render_template('user_cart_checkout.html')
+    cart = getCart(uid=current_user.id)
+    purchase = createPurchase({'uid': current_user.id, 'purchase_date': dt.isoformat(dt.now())})
+
+    try:
+        for item in cart.cart_items:
+            purchase_item = createPurchasedItems({'invoice': purchase.id, 'item': item.product, 'purchased_price': item.product_details.price, 'purchased_quantity': item.quantity})
+
+            if purchase_item is not None:
+                deleteCartItem(id=item.id)
+    except:
+        return request_error()
+    else:
+        return request_ok(message="Invoice created")
