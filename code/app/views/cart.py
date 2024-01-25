@@ -113,15 +113,19 @@ def user_cart_item_add(id):
 @roles_required("user")
 def user_cart_checkout():
     cart = getCart(uid=current_user.id)
-    purchase = createPurchase({'uid': current_user.id, 'purchase_date': dt.isoformat(dt.now())})
+    
+    if len(cart.cart_items) > 0:
+        purchase = createPurchase({'uid': current_user.id, 'purchase_date': dt.isoformat(dt.now())})
+        
+        try:
+            for item in cart.cart_items:
+                purchase_item = createPurchasedItems({'invoice': purchase.id, 'item': item.product, 'item_name': item.product_details.name,'purchased_price': item.product_details.price, 'purchased_quantity': item.quantity})
 
-    try:
-        for item in cart.cart_items:
-            purchase_item = createPurchasedItems({'invoice': purchase.id, 'item': item.product, 'purchased_price': item.product_details.price, 'purchased_quantity': item.quantity})
-
-            if purchase_item is not None:
-                deleteCartItem(id=item.id)
-    except:
-        return request_error()
+                if purchase_item is not None:
+                    deleteCartItem(id=item.id)
+        except:
+            return request_error()
+        else:
+            return request_ok(message="Invoice created")
     else:
-        return request_ok(message="Invoice created")
+        return request_error("No items in the cart.")

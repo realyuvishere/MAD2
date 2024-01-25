@@ -40,8 +40,10 @@ export default {
             </div>
         </div>
 
-        <div class="my-4 d-flex flex-wrap justify-content-around">
-        <Product v-for="product in products" :p="product" />
+        <div>
+            <div class="my-4 d-flex flex-wrap justify-content-around">
+                <Product v-for="product in products" :p="product" />
+            </div>
         </div>
     </div>
     `,
@@ -59,7 +61,7 @@ export default {
     },
     components: {
         CreateProduct,
-        Product
+        Product,
     },
     methods: {
         getManagerProductsMethod() {
@@ -70,6 +72,6 @@ export default {
             .then((res) => {
                 console.log(res);
             })
-        }
+        },
     },
 }

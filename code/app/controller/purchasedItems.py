@@ -6,6 +6,7 @@ def createPurchasedItems(data={}):
         new_purchasedItems = PurchasedItems(
             invoice=data['invoice'], 
             item=data['item'], 
+            item_name=data['item_name'],
             purchased_price=data['purchased_price'], 
             purchased_quantity=data['purchased_quantity']
         )

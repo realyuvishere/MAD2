@@ -1,10 +1,10 @@
 import { logout } from '../methods.js'
-import { delete_user, get_token, get_user_role } from '../utils.js'
+import { delete_user, get_token, get_user_role, get_user } from '../utils.js'
 import Cart from './Cart.js'
 
 export default {
     template: `
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm hover hover-shadow">
         <div class="container-fluid">
             <router-link class="navbar-brand" to="/">Grocery Store</router-link>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,7 +21,7 @@ export default {
                     </li>
                 </ul>
 
-                <ul class="navbar-nav" v-if="role=='user'">
+                <ul class="navbar-nav" v-if="role=='user' && !is_restricted">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
@@ -54,7 +54,7 @@ export default {
                     </li>
                 </ul>
 
-                <ul class="navbar-nav" v-if="role=='manager'">
+                <ul class="navbar-nav" v-if="role=='manager' && !is_restricted">
                     <li class="nav-item">
                         <router-link class="nav-link" aria-current="page" to="/">Home</router-link>
                     </li>
@@ -77,6 +77,8 @@ export default {
         return {
             role: get_user_role(),
             is_login: get_token(),
+            is_restricted: get_user()?.restricted
+
         }
     },
     components: {

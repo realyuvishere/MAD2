@@ -42,7 +42,7 @@ ProductMarshalFields = {
 InvoiceDetailsMarshalFields = {
     "id": fields.Integer,
     "invoice": fields.Integer,
-    "item": fields.Integer,
+    "item_name": fields.String,
     "purchased_price": fields.Integer,
     "purchased_quantity": fields.Integer,
     "item_details": fields.Nested(ProductMarshalFields)

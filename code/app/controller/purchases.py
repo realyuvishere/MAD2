@@ -46,4 +46,4 @@ def getPurchaseDetails(id=''):
     return db.session.query(Purchase, PurchasedItems, Product).select_from(Purchase).join(PurchasedItems).join(Product).filter((Purchase.id == id)).first()
 
 def getUserPurchases(uid=''):
-    return db.session.query(Purchase).filter((Purchase.uid == uid)).first()
+    return db.session.query(Purchase).filter((Purchase.uid == uid)).all()

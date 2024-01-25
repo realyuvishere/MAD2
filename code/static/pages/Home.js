@@ -1,5 +1,7 @@
 import { get_user_role } from "../utils.js"
 import Marketplace from "../components/Marketplace.js"
+import AdminHome from "../components/AdminHome.js"
+import ManagerHome from "../components/ManagerHome.js"
 
 export default {
     template: `
@@ -8,15 +10,10 @@ export default {
         
         <Marketplace v-if="role=='user'" />
 
-        <div v-if="role=='admin'">
-            Welcome admin
-        </div>
+        <AdminHome v-if="role=='admin'" />
     
-        <div v-if="role=='manager'">
-            <div>
-                
-            </div>
-        </div>
+        <ManagerHome v-if="role=='manager'" />
+        
     </div>
 
     `,
@@ -25,7 +22,7 @@ export default {
             role: get_user_role()
         }
     },
-    components: {Marketplace},
+    components: {Marketplace, AdminHome, ManagerHome},
     methods: {
         
     },

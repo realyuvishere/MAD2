@@ -68,6 +68,10 @@ const getAllManagers = () => {
     return get('/admin/managers')
 }
 
+const getAllUsers = () => {
+    return get('/admin/users')
+}
+
 const unrestrictUserById = (id) => {
     return get(`/admin/users/unrestrict/${id}`)
 }
@@ -138,6 +142,7 @@ export {
     addCartItem,
     addNewCartItem,
     getAllManagers,
+    getAllUsers,
     restrictUserById,
     unrestrictUserById,
     getManagerProducts,

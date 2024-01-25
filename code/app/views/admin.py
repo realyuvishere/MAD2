@@ -8,7 +8,17 @@ from ..models import Product
 @auth_required('token')
 @roles_required("admin")
 def admin_users():
-    return render_template('admin_users.html')
+    user_role = datastore.find_role("user")
+    
+    users = getAllUsers()
+
+    u = []
+
+    for user in users:
+        if user.has_role(user_role):
+            u.append(user)
+
+    return request_ok(payload=marshal_user(u))
 
 @app.route('/admin/users/restrict/<id>', methods=['GET'])
 @auth_required('token')
