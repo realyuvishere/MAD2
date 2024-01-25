@@ -10,7 +10,10 @@ export default {
             <div class="card-body">
                 <h5 class="card-title">{{ product.name }}</h5>
                 <p class="card-text text-muted">{{ product.description }}</p>
-                <div><span class="badge text-bg-primary">{{ product.category_details.name }}</span></div>
+                <div>
+                    <span class="badge text-bg-primary">{{ product.category_details.name }}</span>
+                    <span class="badge text-bg-danger" v-if="product.units_available == 0">Out of Stock</span>
+                </div>
             </div>
             <ul class="list-group list-group-flush">
                 <li class="list-group-item"><i class="bi bi-currency-rupee"></i>{{ product.price }} / {{ product.unit_of_measurement }}</li>
@@ -20,7 +23,7 @@ export default {
                 <li class="list-group-item"><b>Best before</b>: {{ product.expiry_date.replace('T', ' ') }}</li>
             </ul>
 
-            <div class="card-body" v-if="role=='user'">
+            <div class="card-body" v-if="role=='user' && product.units_available > 0">
                 <div class="input-group">
                     <button class="btn btn-link" type="button" @click="subtractProductMethod">
                         <i class="bi bi-dash-circle"></i>
@@ -32,7 +35,7 @@ export default {
                 </div>
             </div>
             <div class="card-footer">
-                <button type="button" class="btn btn-primary" @click="addToCartMethod" v-if="role=='user'">Add to cart</button>
+                <button type="button" class="btn btn-primary" @click="addToCartMethod" v-if="role=='user'" :disabled="product.units_available == 0">Add to cart</button>
                 <div class="btn-group w-100" role="group" v-if="role=='manager'">
                     <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProduct">Edit</button>
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteProductConfirm">Delete</button>
@@ -69,7 +72,7 @@ export default {
     },
     methods: {
         addProductMethod() {
-            this.payload.quantity += 1
+            this.payload.quantity = Number(this.payload.quantity) + 1
         },
         subtractProductMethod() {
             if (this.payload.quantity > 0) this.payload.quantity -= 1

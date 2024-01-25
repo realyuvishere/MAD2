@@ -36,7 +36,7 @@ def user_search():
 
 @app.route('/marketplace', methods=['GET'])
 @auth_required('token')
-# @cache.cached(timeout=50)
+@cache.cached(timeout=50)
 def user_marketplace():
 
     products = getAllProducts()

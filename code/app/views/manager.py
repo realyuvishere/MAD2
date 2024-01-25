@@ -1,20 +1,18 @@
-from flask import current_app as app, request
+from flask import current_app as app, request, send_file, Response
 from flask_security import auth_required, roles_required, current_user
 from ..controller import createCategory, deleteProduct, getProduct, editProduct, getProductsByManager, createProduct, getActiveCategories, getProductAvailableQuantity
 from ..utils import request_error, request_ok, marshal_product, marshal_category
+from ..services import generate_manager_csv
 from datetime import datetime
 
 @app.route('/manager/download-csv', methods=['GET'])
 @auth_required('token')
 @roles_required("manager")
 def manager_download_csv():
-    categories = getActiveCategories()
 
-    if categories:
-        payload = marshal_category(categories)
-        return request_ok(payload=payload)
-    else:
-        return request_error()
+    file = generate_manager_csv(current_user)
+
+    return send_file(file, as_attachment=True, mimetype="text/csv", download_name=f"{current_user.id}.csv")
 
 
 @app.route('/manager/categories', methods=['GET'])
@@ -38,8 +36,6 @@ def manager_products():
     id = current_user.id
 
     payload = getProductsByManager(id=id)
-
-    # print(payload[0].serialize())
 
     if payload is not None:
         payload = marshal_product(payload)

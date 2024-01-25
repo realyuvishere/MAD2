@@ -1,4 +1,5 @@
 import {get_user} from '../utils.js'
+import { getManagerCSV } from '../methods.js'
 
 export default {
     template: `
@@ -17,6 +18,15 @@ export default {
                     </div>
                 </div>
             </div>
+            <div class="col-md-4 pt-5">
+                <div class="card rounded-4 shadow-sm border-0 hover hover-shadow p-4 bg-body-tertiary h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">Download Product Data</h5>
+                        <p class="card-text">Download your products data in a CSV file.</p>
+                        <a class="stretched-link" href="#" @click="downloadCSVMethod"></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     `,
@@ -25,5 +35,12 @@ export default {
             manager: get_user()
         }
     },
-    methods: {},
+    methods: {
+        downloadCSVMethod() {
+            getManagerCSV()
+            .then((res) => {
+                console.log(res)
+            })
+        },
+    },
 }

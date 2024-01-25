@@ -6,7 +6,7 @@ from ..utils import marshal_invoice, request_ok, marshal_invoice_details, cache
 @app.route('/invoice/all', methods=['GET'])
 @auth_required('token')
 @roles_required("user")
-# @cache.cached(timeout=50)
+@cache.cached(timeout=30)
 def get_all_invoices():
 
     invoices = getUserPurchases(uid=current_user.id)

@@ -40,6 +40,7 @@ export default {
             deleteManagerProduct(this.deleteId)
             .then((res) => {
                 console.log(res)
+                window.alert('Product deleted.')
             })
         },
     },

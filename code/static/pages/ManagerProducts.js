@@ -34,7 +34,7 @@ export default {
 
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" @click="requestCategoryMethod">Create</button>
+                        <button type="button" class="btn btn-success" @click="requestCategoryMethod" data-bs-dismiss="modal">Create</button>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,8 @@ export default {
         requestCategoryMethod() {
             createManagerCategoryRequest(this.payload)
             .then((res) => {
-                console.log(res);
+                console.log(res)
+                window.alert('Category request sent.')
             })
         },
     },

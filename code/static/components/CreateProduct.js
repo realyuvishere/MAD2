@@ -62,7 +62,7 @@ export default {
                     </div>
 
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-success" @click="createProductMethod">Create</button>
+                        <button type="button" class="btn btn-success" @click="createProductMethod" data-bs-dismiss="modal">Create</button>
                     </div>
                 </div>
             </div>
@@ -97,6 +97,7 @@ export default {
             createManagerProduct(this.payload)
             .then((res) => {
                 console.log(res)
+                window.alert('Product created')
             })
         },
     },

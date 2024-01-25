@@ -84,6 +84,10 @@ const getManagerProducts = () => {
     return get('/manager/products')
 }
 
+const getManagerCSV = () => {
+    return get('/manager/download-csv', {}, false)
+}
+
 const createManagerCategoryRequest = (data={name: String(), description: String()}) => {
     return post('/manager/category/request', {...data})
 }
@@ -156,4 +160,5 @@ export {
     unrestrictManagerProduct,
     restrictManagerProduct,
     userCartCheckout,
+    getManagerCSV,
 }

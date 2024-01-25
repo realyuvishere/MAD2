@@ -27,7 +27,7 @@ const delete_user = () => {
     localStorage.removeItem('user')
 }
 
-const make_request_ = (url, params) => {
+const make_request_ = (url, params, json=true) => {
     const defaultParams = {
         headers: {
             'Content-Type': 'application/json',
@@ -35,28 +35,32 @@ const make_request_ = (url, params) => {
         },
     }
     return fetch(url, {...defaultParams, ...params}).then(async (res) => {
-        const data = await res.json();
-        if (res.status !== 200) {
-            throw Error(data.message)
+        if (json) {
+            const data = await res.json();
+            if (res.status !== 200) {
+                throw Error(data.message)
+            }
+            return data
+        } else {
+            return res
         }
-        return data
     })
 }
 
-const get = (url, params) => {
+const get = (url, params, json=true) => {
     const defaultParams = {
         method: 'GET'
     }
-    return make_request_(url, {...defaultParams, ...params})
+    return make_request_(url, {...defaultParams, ...params}, json)
 }
 
-const post = (url, payload, params) => {
+const post = (url, payload, params, json=true) => {
     const defaultParams = {
         method: 'POST',
         body: JSON.stringify(payload),
     }
 
-    return make_request_(url, {...params, ...defaultParams})
+    return make_request_(url, {...params, ...defaultParams}, json)
 }
 
 

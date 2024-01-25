@@ -1,4 +1,4 @@
-import { logout } from '../methods.js'
+import { logout, getManagerCSV } from '../methods.js'
 import { delete_user, get_token, get_user_role, get_user } from '../utils.js'
 import Cart from './Cart.js'
 
@@ -62,7 +62,7 @@ export default {
                         <router-link class="nav-link" to="/manager/products">Manage products</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link class="nav-link" to="/manager/download">Download CSV</router-link>
+                        <a class="nav-link" href="#" @click="downloadCSVMethod">Download CSV</a>
                     </li>
                     <li class="nav-item" v-if="is_login">
                         <button class="btn btn-outline-danger" @click='logoutMethod'><i class="bi bi-power"></i></button>
@@ -88,6 +88,14 @@ export default {
         logoutMethod() {
             delete_user()
             logout().then((res) => this.$router.push({ path: '/login' }))
+        },
+        downloadCSVMethod() {
+            getManagerCSV()
+            .then((res) => {
+                if (res.ok) {
+                    console.log(res.body)
+                }
+            })
         },
     },
 }
